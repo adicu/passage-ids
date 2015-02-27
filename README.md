@@ -2,10 +2,7 @@
 
 #List of Developers
 
--Jillian Knoll
+- Jillian Knoll
 - Brian Zeng
-<<<<<<< HEAD
 - Howon Byun
-=======
 - Ken Aizawa
->>>>>>> upstream/master
