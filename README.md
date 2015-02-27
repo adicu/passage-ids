@@ -2,3 +2,4 @@
 
 # List of Developers
 - Brian Zeng
+- Ken Aizawa
