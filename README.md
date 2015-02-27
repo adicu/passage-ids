@@ -2,4 +2,5 @@
 
 #List of Developers
 
-#Jillian Knoll
+-Jillian Knoll
+- Brian Zeng
