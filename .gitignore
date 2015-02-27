@@ -9,6 +9,7 @@ lib-cov
 *.pyc
 *.swp
 *.py~
+.gitignore~
 .DS_Store
 
 .vagrant
