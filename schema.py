@@ -14,9 +14,9 @@ class Passage(db.Model):
 	author = db.Column(db.String(100), nullable=True)
 
 	def to_JSON(self):
-		return{
-		"content": self.content
-		"title": self.title
+		return {
+		"content": self.content,
+		"title": self.title,
 		"author": self.author
 		}
 
