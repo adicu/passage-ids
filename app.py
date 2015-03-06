@@ -3,21 +3,32 @@ __author__ = 'ADI Labs'
 from flask import Flask, render_template, request
 import requests
 from schema import Passage, Title
+<<<<<<< HEAD
+# from ContactForm import QuoteForm
+=======
 from passageGenerator import generatePassages
+>>>>>>> upstream/master
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-# quote = Passage(content="Lorem ipsum", title="Iliad", author="Ken")
-# print(quote.content)
+quote = Passage(content="Lorem ipsum", title="Iliad", author="Ken")
+print(quote.content)
 
 passages = generatePassages()
 
 
 @app.route("/")
 def home():
-	return render_template("index.html")
+	# if request.form['button'] == 'login':
+	# 	print("login clicked")
+	# 	login()
+	return render_template("content.html")
 
+@app.route("/login", methods = ['GET', 'POST'])
+def login():
+	if request.method == "POST":	
+		return render_template("login.html")
 # def display_passage():
 # 	if request.method == 'POST':
 #         if request.form['submit'] == 'Do Something':
@@ -27,6 +38,10 @@ def home():
 #         else:
 #             pass # unknown
 #     # elif request.method == 'GET':
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return "Sorry, this page was not found.", 404
 
 if __name__ == '__main__':
 	app.run(host = '0.0.0.0')
