@@ -4,7 +4,7 @@ from flask import Flask, render_template, request
 import requests
 from schema import Passage, Title
 
-app = Flask(__name__)
+app = Flask(__name_)
 app.config["DEBUG"] = True
 
 quote = Passage(content="Lorem ipsum", title="Iliad", author="Ken")

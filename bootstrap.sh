@@ -5,5 +5,7 @@ sudo apt-get install -y vim
 sudo pip install flask
 sudo pip install -r /vagrant/config/requirements.txt
 sudo pip install requests
+sudo pip install flask-sqlalchemy
+sudo pip install flask-whooshalchemy
 
 echo hello
