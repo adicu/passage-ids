@@ -3,13 +3,20 @@ __author__ = 'ADI Labs'
 from flask import Flask, render_template, request
 import requests
 from schema import Passage, Title
+<<<<<<< HEAD
 # from ContactForm import QuoteForm
+=======
+from passageGenerator import generatePassages
+>>>>>>> upstream/master
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
 quote = Passage(content="Lorem ipsum", title="Iliad", author="Ken")
 print(quote.content)
+
+passages = generatePassages()
+
 
 @app.route("/")
 def home():
@@ -37,4 +44,4 @@ def page_not_found(error):
     return "Sorry, this page was not found.", 404
 
 if __name__ == '__main__':
-	app.run(host = "0.0.0.0")
+	app.run(host = '0.0.0.0')
