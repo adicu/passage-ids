@@ -53,7 +53,6 @@ input{
 	height: 2rem;
 	border-radius: 10px;
 	width: 3rem;
-
 }
 
 span{
@@ -61,13 +60,26 @@ span{
 }
 
 #CC{
-	margin-left: 12rem;
+	margin-left: 45%;
 }
 
 #passage{
 	margin-top: 1rem;
     border-style: solid;
-	height: 35rem;	
+	height: 35rem;
+
+}
+
+#text{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	height: 60%;
+	width: 80%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 }
 
 #quiz{	
@@ -79,15 +91,19 @@ span{
     height: 35rem;
     overflow-y: auto;
     border-style: solid;
+	text-align: center;
 }
 #prompt{
-	text-align: center;
+	margin-top: 1rem;
 	border-style: solid;
 }
 
 #answer_choices{
 	margin-top: 2rem;
-	height: 30rem;
+	margin-left: auto;
+	margin-right: auto;
+	height: 80%;
+	width: 80%;
 	border-style: solid;
 }
 /*
