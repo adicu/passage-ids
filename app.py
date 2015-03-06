@@ -7,10 +7,10 @@ from schema import Passage, Title
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-quote = Passage(content="Lorem ipsum", title="Iliad", author="Ken")
-print(quote.content)
+# quote = Passage(content="Lorem ipsum", title="Iliad", author="Ken")
+# print(quote.content)
 
-app.route("/")
+@app.route("/")
 def home():
 	return render_template("index.html")
 
