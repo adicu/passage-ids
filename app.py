@@ -3,12 +3,16 @@ __author__ = 'ADI Labs'
 from flask import Flask, render_template, request
 import requests
 from schema import Passage, Title
+from passageGenerator import generatePassages
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # quote = Passage(content="Lorem ipsum", title="Iliad", author="Ken")
 # print(quote.content)
+
+passages = generatePassages()
+
 
 @app.route("/")
 def home():
@@ -25,4 +29,4 @@ def home():
 #     # elif request.method == 'GET':
 
 if __name__ == '__main__':
-	app.run(host = "0.0.0.0")
+	app.run(host = '0.0.0.0')
