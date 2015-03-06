@@ -4,25 +4,19 @@
 	<meta charset="UTF-8">
 	<title>Passage ID</title>
 	<link rel="stylesheet" href="../static/css/style.css">
+	<script src="../static/js/login_form.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 </head>
 <body>
 	<div id="titlebar">
 		<div id="name">Passage ID</div>
-		<div id="login"><input id = "login"type="button" name="login" value="Login"></div>
-	</div>
-	<div id="content">
-		<div id="static">
-			<div id="lithum" class = "choice"><input type="button" name="choose passage" value="LitHum"></div>
-			<div id="CC" class = "choice"><input type="button" name="choose passage" value="CC"></div>
-			<div id="passage">
-				<div id="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis, quasi nulla dolore quibusdam illum aliquid vero mollitia, saepe, distinctio voluptas, ratione ipsum aliquam facere! Voluptatem, laboriosam non ut quaerat laborum!</div>
-			</div>
-		</div>
-		<div id="quiz">
-			<div id="prompt">Choose the author of the book from which this quote was taken </div>
-			<div id="answer_choices">
-			</div>
+		 <div id="login">
+			<form action="/login" method="post">
+            	<button type="submit" id = "login">Login</button>
+        	</form>
 		</div>
 	</div>
+	 {% block results %}
+	 {% endblock %}
 </body>
 </html>

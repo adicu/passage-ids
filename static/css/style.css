@@ -32,9 +32,9 @@ body {
 	margin-top: -1.5rem;
 }
 
-input#login{
+button#login{
 	float: right;
-	margin-right: 3rem;
+	margin-right: 5rem;
 	margin-top: -2rem;
 	color:white
 	width:3rem;
