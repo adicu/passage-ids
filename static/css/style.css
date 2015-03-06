@@ -32,18 +32,28 @@ body {
 	margin-top: -1.5rem;
 }
 
-#login{
+input#login{
 	float: right;
 	margin-right: 3rem;
-	border-style: solid;
 	margin-top: -2rem;
+	color:white
+	width:3rem;
+	background-color: #99CCFF;
 }
 
 .choice{
-	border-style: solid;
 	display:inline-block;
-	margin-top: 0.5rem;
-	margin-bottom: 0rem;
+	margin-top: 0.2rem;
+	margin-bottom: -0.2rem;
+}
+
+input{
+	background-color: #C4DDE2;
+	border: none;
+	height: 2rem;
+	border-radius: 10px;
+	width: 3rem;
+
 }
 
 span{
@@ -69,6 +79,16 @@ span{
     height: 35rem;
     overflow-y: auto;
     border-style: solid;
+}
+#prompt{
+	text-align: center;
+	border-style: solid;
+}
+
+#answer_choices{
+	margin-top: 2rem;
+	height: 30rem;
+	border-style: solid;
 }
 /*
 .btn btn-default{
