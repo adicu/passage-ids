@@ -66,20 +66,20 @@ span{
 #passage{
 	margin-top: 1rem;
     border-style: solid;
-	height: 35rem;
-
+	height: 100%;
 }
 
-#text{
+#passage #text{
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 	border-style: solid;
-	height: 60%;
+	height: 80%;
 	width: 80%;
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
+	overflow: scroll;
 }
 
 #quiz{	
@@ -105,6 +105,18 @@ span{
 	height: 80%;
 	width: 80%;
 	border-style: solid;
+}
+#answer_choices #texts{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	height: 70%;
+	width: 80%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	overflow: scroll;
 }
 /*
 .btn btn-default{
