@@ -25,7 +25,7 @@ def form():
 	if request.method == 'POST' and form.validate():
 		quote = Passage(content = form.content, title = form.title, author = form.author)
 	elif request.method == 'GET':
-		return render_template('index.html', form = form)
+		return render_template('form.html', form = form)
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
