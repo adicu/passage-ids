@@ -6,9 +6,9 @@
 			<div id="CC" class = "choice"><input type="button" name="choose passage" value="CC"></div>
 			<div id="passage">
 				<div id="text">
-					 {% for passage in content2[0].content %}
-				        <p></p>
-				    {% endfor %}
+				{% for content in passage -%}
+				     <p>{content}</p>
+				{% endfor -%}
 				</div>
 			</div>
 		</div>

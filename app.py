@@ -13,7 +13,7 @@ app.config["DEBUG"] = True
 @app.route("/")
 def home():
 	content = generatePassages()
-	return render_template("content.html", content2 = content)
+	return render_template("content.html", passage = content[0].content)
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
