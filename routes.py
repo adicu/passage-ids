@@ -1,2 +1,2 @@
 from flask import Flask, render_template
-from forms import QuoteForm
+from forms import ContactForm
