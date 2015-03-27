@@ -5,16 +5,27 @@ import requests
 from schema import Passage, Title
 from passageGenerator import generatePassages
 import random
+from ContactForm import QuoteForm
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
 content = generatePassages()
 
+
 @app.route("/")
 def home():
 	randQuote = content[random.randint(0, len(content) - 1)]
 	return render_template("content.html", content2 = randQuote)
+
+
+@app.route("/form", methods = ['GET', 'POST'])
+def form():
+	form = QuoteForm()
+	if request.method == 'POST' and form.validate():
+		quote = Passage(content = form.content, title = form.title, author = form.author)
+	elif request.method == 'GET':
+		return render_template('index.html', form = form)
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():

@@ -1,16 +1,9 @@
-from flaskext.wtf import Form, TextField, TextAreaField, SubmitField
-
-__init__()
+from wtforms import Form, TextField, TextAreaField, SubmitField
 
 #form to handle user quote submission
 class QuoteForm(Form):
-	title = StringField("Title", [Required(message= "Provide the title of the work.")])
-	author = StringField("Author"
-	submitter = StringField("Your Name Here", [Required(message= "Input your name. This will be kept private.")]
-	passage = TextAreaField("Passage", [Required(message = "Input the text of the passage.")])
-    submit = SubmitField("Submit Passage")
-
-# //macro to render field
-# //pass in field python variable
-# //in route pass in the form , make a new form
-# //form = QuoteForm(attributes)
+	title = TextField("Title")
+	author = TextField("Author")
+	submitter = TextField("Your Name Here")
+	content = TextAreaField("Content")
+	submit = SubmitField("Submit Passage")
