@@ -6,15 +6,16 @@
 			<div id="CC" class = "choice"><input type="button" name="choose passage" value="CC"></div>
 			<div id="passage">
 				<div id="text">
-					 {% for passage in content2[0].content %}
-				        <p></p>
-				    {% endfor %}
+				    <p>{{content2.content}}</p>
 				</div>
 			</div>
 		</div>
 		<div id="quiz">
 			<div id="prompt">Choose the author of the book from which this quote was taken </div>
 			<div id="answer_choices">
+				<div id="text">
+					<p>{{content2.title}}</p>
+				<div id="text">
 			</div>
 		</div>
 	</div>
