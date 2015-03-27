@@ -9,6 +9,7 @@ sudo pip install -r /vagrant/config/requirements.txt
 sudo pip install requests
 sudo pip install flask-sqlalchemy
 sudo pip install flask-whooshalchemy
+sudo pip install wtforms
 
 
 echo hello
