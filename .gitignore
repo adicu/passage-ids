@@ -1,4 +1,3 @@
-lib-cov
 *.seed
 *.log
 *.csv
@@ -9,28 +8,5 @@ lib-cov
 *.pyc
 *.swp
 *.py~
-.gitignore~
-.DS_Store
 
 .vagrant
-.idea
-
-.Python
-pids
-logs
-results
-include
-share
-lib/python2.7
-
-config/settings.*
-!config/settings.dev
-
-bin/activate*
-bin/easy_install*
-bin/pip*
-bin/python*
-local
-man
-pip-selfcheck.json
-events.db

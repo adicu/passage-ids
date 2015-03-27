@@ -1,0 +1,30 @@
+{% extends "index.html" %}
+{% block results %}
+	<div id="content">
+		<div id="static">
+			<div id="lithum" class = "choice">
+				<form action="/" method="post">
+				    <button type= "submit" id = "choose passage">Lithum</button>
+				</form>
+			</div>
+			<div id="CC" class = "choice">
+				<form action="/" method="post">
+				    <button type= "submit" id = "choose passage">CC</button>
+				</form>
+			</div>
+			<div id="passage">
+				<div id="text">
+				    <p>{{content2.content}}</p>
+				</div>
+			</div>
+		</div>
+		<div id="quiz">
+			<div id="prompt">Choose the author of the book from which this quote was taken </div>
+			<div id="answer_choices">
+				<div id="text">
+					<p>{{content2.title}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

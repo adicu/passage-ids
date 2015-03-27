@@ -32,18 +32,27 @@ body {
 	margin-top: -1.5rem;
 }
 
-#login{
+button#login{
 	float: right;
-	margin-right: 3rem;
-	border-style: solid;
+	margin-right: 5rem;
 	margin-top: -2rem;
+	color:white
+	width:3rem;
+	background-color: #99CCFF;
 }
 
 .choice{
-	border-style: solid;
 	display:inline-block;
-	margin-top: 0.5rem;
-	margin-bottom: 0rem;
+	margin-top: 0.2rem;
+	margin-bottom: -0.2rem;
+}
+
+button{
+	background-color: #C4DDE2;
+	border: none;
+	height: 2rem;
+	border-radius: 10px;
+	width: 3rem;
 }
 
 span{
@@ -51,13 +60,26 @@ span{
 }
 
 #CC{
-	margin-left: 12rem;
+	margin-left: 45%;
 }
 
 #passage{
 	margin-top: 1rem;
     border-style: solid;
-	height: 35rem;	
+	height: 100%;
+}
+
+#passage #text{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	height: 80%;
+	width: 80%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	overflow: scroll;
 }
 
 #quiz{	
@@ -69,42 +91,45 @@ span{
     height: 35rem;
     overflow-y: auto;
     border-style: solid;
-}
-/*
-.btn btn-default{
-	float: right;
-
+	text-align: center;
 }
 
-.message{
-	margin-bottom: 10px;
-	height: 40%;
-	border: black;
-	border-radius: 3px;	
-	background-color: #C4D8E2;
-	color:white;
+#prompt{
+	margin-top: 1rem;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	border-style: solid;
+	font-size: 13px;
 }
 
-.date{
-	padding:1%;
+#answer_choices{
+	margin-top: 2rem;
+	margin-left: auto;
+	margin-right: auto;
+	height: 80%;
+	width: 80%;
+	border-style: solid;
+}
+#answer_choices #texts{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	height: 70%;
+	width: 80%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	overflow: scroll;
 }
 
-.body{
-	height: 45%;
-	padding:1%;
-}
 
-
-.title{
-	padding:1%;
-	border-bottom-style: solid;
-	border-color: #C4E8E2;
+#login-content{
+	height: 100%;
+	width: 50px;
+	border-style: solid;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
-
-.longitude{
-	
-	padding:1%;
-}
-.latitude{
-	padding:1%;
-}*/

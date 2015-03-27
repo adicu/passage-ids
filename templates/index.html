@@ -1,26 +1,37 @@
-{% import "macros.html" as macros %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Passage ID</title>
 	<link rel="stylesheet" href="../static/css/style.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="../static/js/login_form.js"></script>
+	<script src="../static/js/bring_passage.js"></script>
 </head>
 <body>
 	<div id="titlebar">
-		<div id="name">Passage ID</div>
-		<div id="login">Log In</div>
-	</div>
-	<div id="content">
-		<div id="static">
-			<div id="lithum" class = "choice">LitHum</div>
-			<div id="CC" class = "choice">CC</div>
-			<div id="passage"></div>
+		<div id="name">
+			<a href = "/">Passage ID</a>
 		</div>
-		<div id="quiz"></div>
-
-		{{ macros.render_field(form.title) }}
+		<div id="login">
+			<form action="/login" method="post">
+            	<button type="submit" id = "login">Login</button>
+        	</form>
+		</div>
 	</div>
+	<h2>Contact</h2>
+  	<form action="/form" method=POST>
+ 	{{ form.title.label }}
+	{{ form.author }}
+	{{ form.author.label }}
+	{{ form.author }}
+ 
+	{{ form.content.label }}
+	{{ form.content }}
+ 
+	{{ form.submit }}
+  	</form>
+	{% block results %}
+	{% endblock %}
 </body>
 </html>
