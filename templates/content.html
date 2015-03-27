@@ -2,8 +2,16 @@
 {% block results %}
 	<div id="content">
 		<div id="static">
-			<div id="lithum" class = "choice"><input type="button" name="choose passage" value="LitHum"></div>
-			<div id="CC" class = "choice"><input type="button" name="choose passage" value="CC"></div>
+			<div id="lithum" class = "choice">
+				<form action="/" method="post">
+				    <button type= "submit" id = "choose passage">Lithum</button>
+				</form>
+			</div>
+			<div id="CC" class = "choice">
+				<form action="/" method="post">
+				    <button type= "submit" id = "choose passage">CC</button>
+				</form>
+			</div>
 			<div id="passage">
 				<div id="text">
 				    <p>{{content2.content}}</p>
@@ -15,7 +23,7 @@
 			<div id="answer_choices">
 				<div id="text">
 					<p>{{content2.title}}</p>
-				<div id="text">
+				</div>
 			</div>
 		</div>
 	</div>

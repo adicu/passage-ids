@@ -47,7 +47,7 @@ button#login{
 	margin-bottom: -0.2rem;
 }
 
-input{
+button{
 	background-color: #C4DDE2;
 	border: none;
 	height: 2rem;
@@ -66,20 +66,20 @@ span{
 #passage{
 	margin-top: 1rem;
     border-style: solid;
-	height: 35rem;
-
+	height: 100%;
 }
 
-#text{
+#passage #text{
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 	border-style: solid;
-	height: 60%;
+	height: 80%;
 	width: 80%;
 	position: relative;
 	top: 50%;
 	transform: translateY(-50%);
+	overflow: scroll;
 }
 
 #quiz{	
@@ -93,9 +93,14 @@ span{
     border-style: solid;
 	text-align: center;
 }
+
 #prompt{
 	margin-top: 1rem;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
 	border-style: solid;
+	font-size: 13px;
 }
 
 #answer_choices{
@@ -106,41 +111,25 @@ span{
 	width: 80%;
 	border-style: solid;
 }
-/*
-.btn btn-default{
-	float: right;
-
-}
-
-.message{
-	margin-bottom: 10px;
-	height: 40%;
-	border: black;
-	border-radius: 3px;	
-	background-color: #C4D8E2;
-	color:white;
-}
-
-.date{
-	padding:1%;
-}
-
-.body{
-	height: 45%;
-	padding:1%;
+#answer_choices #texts{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	height: 70%;
+	width: 80%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	overflow: scroll;
 }
 
 
-.title{
-	padding:1%;
-	border-bottom-style: solid;
-	border-color: #C4E8E2;
+#login-content{
+	height: 100%;
+	width: 50px;
+	border-style: solid;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
-
-.longitude{
-	
-	padding:1%;
-}
-.latitude{
-	padding:1%;
-}*/
