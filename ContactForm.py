@@ -10,7 +10,7 @@ class QuoteForm(Form):
 	passage = TextAreaField("Passage", [Required(message = "Input the text of the passage.")])
     submit = SubmitField("Submit Passage")
 
-//macro to render field
-//pass in field python variable
-//in route pass in the form , make a new form
-//form = QuoteForm(attributes)
+# //macro to render field
+# //pass in field python variable
+# //in route pass in the form , make a new form
+# //form = QuoteForm(attributes)
