@@ -1,0 +1,110 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+}
+
+#titlebar{
+	margin-top: -3rem;
+	margin-left: -2rem;
+	margin-right: -2rem;
+	height:6rem;
+	background-color: #C4DDE2;
+	text-align: center;
+	padding-top: 2rem;
+}
+
+#name{
+	margin-top : 3em;
+}
+
+#static{
+	margin-top: 2rem;
+	margin-right: 0.5rem;
+	width: 44%;
+	height: 35rem;
+	float: left;
+    text-align: center;
+}
+
+#content{
+	width:90%;
+	float: right;
+	margin-top: -1.5rem;
+}
+
+#login{
+	float: right;
+	margin-right: 3rem;
+	border-style: solid;
+	margin-top: -2rem;
+}
+
+.choice{
+	border-style: solid;
+	display:inline-block;
+	margin-top: 0.5rem;
+	margin-bottom: 0rem;
+}
+
+span{
+	width: 200%;
+}
+
+#CC{
+	margin-left: 12rem;
+}
+
+#passage{
+	margin-top: 1rem;
+    border-style: solid;
+	height: 35rem;	
+}
+
+#quiz{	
+	margin-top: 5rem;
+	margin-left: 0.5rem;
+	margin-bottom: 3rem;
+	float: left;
+	width: 44%;
+    height: 35rem;
+    overflow-y: auto;
+    border-style: solid;
+}
+/*
+.btn btn-default{
+	float: right;
+
+}
+
+.message{
+	margin-bottom: 10px;
+	height: 40%;
+	border: black;
+	border-radius: 3px;	
+	background-color: #C4D8E2;
+	color:white;
+}
+
+.date{
+	padding:1%;
+}
+
+.body{
+	height: 45%;
+	padding:1%;
+}
+
+
+.title{
+	padding:1%;
+	border-bottom-style: solid;
+	border-color: #C4E8E2;
+}
+
+.longitude{
+	
+	padding:1%;
+}
+.latitude{
+	padding:1%;
+}*/

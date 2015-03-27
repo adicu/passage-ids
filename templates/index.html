@@ -1,0 +1,26 @@
+{% import "macros.html" as macros %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Passage ID</title>
+	<link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+	<div id="titlebar">
+		<div id="name">Passage ID</div>
+		<div id="login">Log In</div>
+	</div>
+	<div id="content">
+		<div id="static">
+			<div id="lithum" class = "choice">LitHum</div>
+			<div id="CC" class = "choice">CC</div>
+			<div id="passage"></div>
+		</div>
+		<div id="quiz"></div>
+
+		{{ macros.render_field(form.title) }}
+	</div>
+</body>
+</html>
