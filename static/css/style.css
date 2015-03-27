@@ -47,7 +47,7 @@ button#login{
 	margin-bottom: -0.2rem;
 }
 
-input{
+button{
 	background-color: #C4DDE2;
 	border: none;
 	height: 2rem;
@@ -93,9 +93,14 @@ span{
     border-style: solid;
 	text-align: center;
 }
+
 #prompt{
 	margin-top: 1rem;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
 	border-style: solid;
+	font-size: 13px;
 }
 
 #answer_choices{
@@ -118,41 +123,13 @@ span{
 	transform: translateY(-50%);
 	overflow: scroll;
 }
-/*
-.btn btn-default{
-	float: right;
 
+
+#login-content{
+	height: 100%;
+	width: 50px;
+	border-style: solid;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }
-
-.message{
-	margin-bottom: 10px;
-	height: 40%;
-	border: black;
-	border-radius: 3px;	
-	background-color: #C4D8E2;
-	color:white;
-}
-
-.date{
-	padding:1%;
-}
-
-.body{
-	height: 45%;
-	padding:1%;
-}
-
-
-.title{
-	padding:1%;
-	border-bottom-style: solid;
-	border-color: #C4E8E2;
-}
-
-.longitude{
-	
-	padding:1%;
-}
-.latitude{
-	padding:1%;
-}*/

@@ -21,6 +21,11 @@ def login():
 	if request.method == "POST":	
 		return render_template("login.html")
 
+@app.route("/", methods = ['GET', 'POST'])
+def bringCC():
+	if request.method == "POST":
+		randQuote = content[random.randint(0, len(content) - 1)]	
+		return render_template("content.html", content2 = randQuote)
 
 @app.errorhandler(404)
 def page_not_found(error):
