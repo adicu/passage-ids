@@ -4,16 +4,17 @@ from flask import Flask, render_template, request
 import requests
 from schema import Passage, Title
 from passageGenerator import generatePassages
+import random
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
-# print(passages[0].content)
+content = generatePassages()
 
 @app.route("/")
 def home():
-	content = generatePassages()
-	return render_template("content.html", content2 = content)
+	randQuote = content[random.randint(0, len(content) - 1)]
+	return render_template("content.html", content2 = randQuote)
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
