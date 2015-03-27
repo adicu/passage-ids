@@ -22,8 +22,9 @@ def home():
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
 	form = QuoteForm()
-	if request.method == 'POST' and form.validate():
+	if request.method == 'POST':
 		quote = Passage(content = form.content, title = form.title, author = form.author)
+		return render_template('form.html', form = form)
 	elif request.method == 'GET':
 		return render_template('form.html', form = form)
 
