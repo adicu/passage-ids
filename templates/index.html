@@ -1,4 +1,3 @@
-{% import "macros.html" as macros %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,11 +16,20 @@
             	<button type="submit" id = "login">Login</button>
         	</form>
 		</div>
-		<div id="quiz"></div>
-
-		{{ macros.render_field(form.title) }}
 	</div>
-	 {% block results %}
-	 {% endblock %}
+	<h2>Contact</h2>
+  	<form action="/form" method=POST>
+ 	{{ form.title.label }}
+	{{ form.author }}
+	{{ form.author.label }}
+	{{ form.author }}
+ 
+	{{ form.content.label }}
+	{{ form.content }}
+ 
+	{{ form.submit }}
+  	</form>
+	{% block results %}
+	{% endblock %}
 </body>
 </html>
