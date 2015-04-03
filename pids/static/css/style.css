@@ -1,57 +1,89 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 0;
+  margin:0;
 }
 
 #titlebar{
-	margin-top: -3rem;
-	margin-left: -2rem;
-	margin-right: -2rem;
-	height:6rem;
+	position: absolute;
+	width: 100%;
+	margin: 0;
+	top: 0;
+	height:8%;
 	background-color: #C4DDE2;
 	text-align: center;
-	padding-top: 2rem;
 }
 
 #name{
-	margin-top : 3em;
+	position: absolute;
+	top: 40%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;	
+	width: 10%;
+	font: 16px Helvetica;
+	/*margin-right: 0;*/
 }
 
-#static{
-	margin-top: 2rem;
-	margin-right: 0.5rem;
-	width: 44%;
-	height: 35rem;
-	float: left;
-    text-align: center;
+#name a{
+	text-decoration: none;
+	color: black;
 }
-
-#content{
-	width:90%;
-	float: right;
-	margin-top: -1.5rem;
+#name a:visited {
+    text-decoration: none;
 }
 
 button#login{
-	float: right;
-	margin-right: 5rem;
-	margin-top: -2rem;
-	color:white
-	width:3rem;
-	background-color: #99CCFF;
+	position: absolute;
+	top: 40%;
+	margin: 0;
+	right: 5%;
+	font: 16px Helvetica;
+	color:black;
+	width:5rem;
+	padding: 0;
+	background-color: transparent;
+	border: 0;
+}
+
+button#login:hover{
+	color: white;
+}
+
+#content{
+	position: absolute;
+	width:80%;
+	top: 4%;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	margin: auto;
+	height: 80%;
+}
+
+#static{
+	margin-right: 0;
+	width: 49%;
+	height: 100%;
+	float: left;
+    text-align: center;
+	border: 0;
 }
 
 .choice{
 	display:inline-block;
-	margin-top: 0.2rem;
-	margin-bottom: -0.2rem;
+	margin-top: 3%;
+	margin-bottom: 0;
 }
 
-button{
-	background-color: #C4DDE2;
-	border: none;
+button#choose_passage{
+	background-color: transparent;
+	padding: 0;
+	border-color: #ccc;
+	border-style: solid;
 	height: 2rem;
-	border-radius: 10px;
+	border-radius: 0;
 	width: 3rem;
 }
 
@@ -64,8 +96,7 @@ span{
 }
 
 #passage{
-	margin-top: 1rem;
-    border-style: solid;
+    /*border-style: solid;*/
 	height: 100%;
 }
 
@@ -77,40 +108,50 @@ span{
 	height: 80%;
 	width: 80%;
 	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
+	top: 5%;
 	overflow: scroll;
 }
 
 #quiz{	
-	margin-top: 5rem;
-	margin-left: 0.5rem;
-	margin-bottom: 3rem;
+	margin-left: 2%;
+	border: 0;
 	float: left;
-	width: 44%;
-    height: 35rem;
+	width: 49%;
+    height: 100%;
     overflow-y: auto;
     border-style: solid;
 	text-align: center;
 }
 
 #prompt{
-	margin-top: 1rem;
+	margin-top: 3%;
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
 	border-style: solid;
 	font-size: 13px;
+	height: 2rem;
+	overflow: auto;	
+}
+
+#prompt p{
+	position: relative;
+	top: 25%;	
+	overflow: auto;	
+	margin: 0;	
 }
 
 #answer_choices{
-	margin-top: 2rem;
+	position: relative;
+	top: 4%;
 	margin-left: auto;
 	margin-right: auto;
 	height: 80%;
 	width: 80%;
+	margin-bottom: 0;	
 	border-style: solid;
 }
+
 #answer_choices #texts{
 	text-align: center;
 	margin-left: auto;

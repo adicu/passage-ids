@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	{% block head %}
 	<meta charset="UTF-8">
 	<title>Passage ID</title>
 	<link rel="stylesheet" href="../static/css/style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="../static/js/login_form.js"></script>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<script src="../static/js/bring_passage.js"></script>
+	{% endblock %}
 </head>
 <body>
 	<div id="titlebar">
@@ -14,12 +17,12 @@
 			<a href = "/">Passage ID</a>
 		</div>
 		<div id="login">
-			<form action="/login" method="post">
-            	<button type="submit" id = "login">Login</button>
+			<form action="/login" method="post"> 
+            	<button type="submit" id = "login">Login <i class="fa fa-sign-in fa-lg"></i></button>
         	</form>
 		</div>
 	</div>
-	{% block results %}
+	{% block body %}
 	{% endblock %}
 </body>
 </html>
