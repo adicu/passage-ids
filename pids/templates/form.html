@@ -1,15 +1,21 @@
 {% extends "index.html" %}
 {% block body %}
-<h2>Contact</h2>
+<h2>Submit a Quote</h2>
   	<form action="/form" method=POST>
- 	{{ form.title.label }}
-	{{ form.author }}
-	{{ form.author.label }}
-	{{ form.author }}
+      {{ form.hidden_tag() }}
+
+ 	  {{ form.submitter.label }}
+  	  {{ form.submitter }}
  
-	{{ form.content.label }}
-	{{ form.content }}
+ 	  {{ form.title.label }}
+	  {{ form.title }}
+
+	  {{ form.author.label }}
+	  {{ form.author }}
  
-	{{ form.submit }}
+	  {{ form.content.label }}
+	  {{ form.content }}
+ 
+	  {{ form.submit }}
   	</form>
 {% endblock %}

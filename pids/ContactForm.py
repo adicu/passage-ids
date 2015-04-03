@@ -1,4 +1,5 @@
-from wtforms import Form, TextField, TextAreaField, SubmitField
+from wtforms import TextField, TextAreaField, SubmitField
+from flask.ext.wtf import Form
 
 #form to handle user quote submission
 class QuoteForm(Form):
