@@ -1,0 +1,42 @@
+
+div#mainbody{
+	font: 18px 'Noto Sans', Helvetica sans-serif;	
+	position: absolute;
+	left: 0;
+	right: 0;
+	margin: auto;	
+	top: 20%;
+	height: 50%;
+	border: 2px;
+	border-style: solid;
+	width: 350px;
+}
+
+div#loginform{ 
+	margin-top: 20%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;	
+	height: 100%;
+}
+
+div#loginform h5{
+	margin-left: auto;
+	margin-right: auto;
+	width: 70%;
+}
+
+button#signinButton{
+	font: 18px 'Noto Sans', Helvetica sans-serif;
+	margin-top: 10%;
+	height: 10%;
+	border: 0;
+	border-radius: 0;
+	width: 100%;
+	background-color: transparent;
+	cursor:pointer;
+}
+
+button#signinButton:hover{
+	color: #B8005C;
+}

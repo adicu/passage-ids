@@ -1,5 +1,7 @@
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px 'Noto Sans', Helvetica sans-serif;	;
   padding: 0;
   margin:0;
 }
@@ -21,15 +23,15 @@ body {
 	right: 0;
 	bottom: 0;
 	margin: auto;	
-	width: 10%;
+	width: 300px;
 	font: 16px Helvetica;
-	/*margin-right: 0;*/
 }
 
 #name a{
 	text-decoration: none;
 	color: black;
 }
+
 #name a:visited {
     text-decoration: none;
 }
@@ -45,6 +47,7 @@ button#login{
 	padding: 0;
 	background-color: transparent;
 	border: 0;
+	cursor:pointer;
 }
 
 button#login:hover{
@@ -53,8 +56,8 @@ button#login:hover{
 
 #content{
 	position: absolute;
-	width:80%;
-	top: 4%;
+	width:65%;
+	top: 8%;
 	right: 0;
 	left: 0;
 	bottom: 0;
@@ -85,31 +88,32 @@ button#choose_passage{
 	height: 2rem;
 	border-radius: 0;
 	width: 3rem;
+	cursor:pointer
 }
-
 span{
-	width: 200%;
+	width: 100%;
 }
 
 #CC{
-	margin-left: 45%;
+	margin-left: 35%;
 }
 
-#passage{
-    /*border-style: solid;*/
-	height: 100%;
-}
-
-#passage #text{
+#static #text{
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
 	border-style: solid;
 	height: 80%;
-	width: 80%;
+	width: 90%;
 	position: relative;
 	top: 5%;
 	overflow: scroll;
+	padding-bottom: 1%;
+}
+
+#static #text p {
+	padding-left: 1%;
+	padding-right: 1%;
 }
 
 #quiz{	
@@ -127,7 +131,7 @@ span{
 	margin-top: 3%;
 	margin-left: auto;
 	margin-right: auto;
-	width: 80%;
+	width: 90%;
 	border-style: solid;
 	font-size: 13px;
 	height: 2rem;
@@ -147,9 +151,10 @@ span{
 	margin-left: auto;
 	margin-right: auto;
 	height: 80%;
-	width: 80%;
+	width: 90%;
 	margin-bottom: 0;	
 	border-style: solid;
+	padding-bottom: 1%;
 }
 
 #answer_choices #texts{
@@ -166,11 +171,3 @@ span{
 }
 
 
-#login-content{
-	height: 100%;
-	width: 50px;
-	border-style: solid;
-	text-align: center;
-	margin-left: auto;
-	margin-right: auto;
-}

@@ -3,6 +3,7 @@
 {% block head %}
     {{ super() }}
     <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+    <link rel="stylesheet" href="../static/css/auth_form.css">
 {% endblock %}
 
 {% block body %}
@@ -14,17 +15,7 @@
     </div>
 </div>
 
-{% if success %}
-{% else %}
-<div class="textContainer">
-    <div class="container">
-        <div>
-          <p class="about">Log in to access</p>
-      </div>
-    </div>
-</div>
-{% endif %}
-<div class="container main-body">
+<div id = "mainbody">
   {% if success %}
     <h1> Welcome {{ uni }}! </h1>
     <h5> Your code is: {{ code }} </h5>
@@ -32,12 +23,13 @@
     {% if reason %}
       <h1 style="color:red"> {{ reason }} </h1>
     {% endif %}
-    <h3>Getting access to the API</h3>
-    <h5>To use the API, you will need a Columbia or Barnard e-mail address.</h5>
-    <button id='signinButton' onclick='login()' style="margin-bottom: 1em;">
-        Get access
-    </button>
-    <script>
+    <div id = "loginform">
+        <h5>Use your Columbia email to log in</h5>
+        <button id='signinButton' onclick='login()' style="margin-bottom: 1em;">
+          log in <i class="fa fa-google fa-lg"></i>
+        </button>
+      <script>
+    </div>
       function login() {
           var params = {
               'callback': signinCallback,
