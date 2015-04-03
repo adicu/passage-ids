@@ -2,16 +2,23 @@ __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
 import requests
-from schema import Passage, Title
+from schema import db, Passage, Title
 import random
 from flask.ext.sqlalchemy import SQLAlchemy
 from ContactForm import QuoteForm
 
 
-app = Flask(__name__)
-db = SQLAlchemy(app)
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+    db.init_app(app)
+    return app, db
+
+app, db = create_app()
 
 app.config["DEBUG"] = True
+
+
 
 @app.route("/")
 def home():
