@@ -18,6 +18,7 @@ app, db = create_app()
 
 app.config["DEBUG"] = True
 
+app.secret_key = 'development key'
 
 @app.route("/")
 def home():
@@ -27,14 +28,15 @@ def home():
 
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
-	form = QuoteForm()
-	if request.method == 'POST':
-		quote = Passage(content = form.content, title = form.title, author = form.author)
-		db.session.add(quote)
-		db.session.commit()
-		return render_template('form.html', form = form)
-	elif request.method == 'GET':
-		return render_template('form.html', form = form)
+    form = QuoteForm()
+    if request.method == 'POST':
+        print(form.content.data)
+        quote = Passage(content=form.content.data, title=form.title.data, author=form.author.data)
+        db.session.add(quote)
+        db.session.commit()
+        return render_template('form.html', form = form)
+    elif request.method == 'GET':
+        return render_template('form.html', form = form)
 
 # @app.route("/login", methods = ['GET', 'POST'])
 # def login():
@@ -43,9 +45,10 @@ def form():
 
 @app.route("/", methods = ['GET', 'POST'])
 def bringCC():
-	if request.method == "POST":
-		randQuote = content[random.randint(0, len(content) - 1)]	
-		return render_template("content.html", content2 = randQuote)
+    if request.method == "POST":
+        content = Passage.query.all()
+        randQuote = content[random.randint(0, len(content) - 1)]	
+        return render_template("content.html", content2 = randQuote)
 
 @app.errorhandler(404)
 def page_not_found(error):

@@ -10,6 +10,6 @@ sudo pip install requests
 sudo pip install flask-sqlalchemy
 sudo pip install flask-whooshalchemy
 sudo pip install wtforms
-
+sudo pip install sqlite3
 
 echo hello
