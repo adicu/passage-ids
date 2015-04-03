@@ -2,18 +2,26 @@ __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
 import requests
-from schema import Passage, Title
-from passageGenerator import generatePassages
+from schema import db, Passage, Title
 import random
+from flask.ext.sqlalchemy import SQLAlchemy
 from ContactForm import QuoteForm
 
-app = Flask(__name__)
+
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+    db.init_app(app)
+    return app, db
+
+app, db = create_app()
+
 app.config["DEBUG"] = True
 
-content = generatePassages()
 
 @app.route("/")
 def home():
+	content = Passage.query.all()
 	randQuote = content[random.randint(0, len(content) - 1)]
 	return render_template("content.html", content2 = randQuote)
 
@@ -22,6 +30,8 @@ def form():
 	form = QuoteForm()
 	if request.method == 'POST':
 		quote = Passage(content = form.content, title = form.title, author = form.author)
+		db.session.add(quote)
+		db.session.commit()
 		return render_template('form.html', form = form)
 	elif request.method == 'GET':
 		return render_template('form.html', form = form)
