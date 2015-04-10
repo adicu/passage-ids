@@ -5,7 +5,11 @@
     <script src="https://apis.google.com/js/client:platform.js" async defer></script>
     <link rel="stylesheet" href="../static/css/auth_form.css">
 {% endblock %}
-
+{% block header %}
+    <div id="name">
+      <a href = "/login">Passage ID</a>
+    </div>
+{% endblock %}
 {% block body %}
 <div class="logoContainer">
     <div class="container">
@@ -18,22 +22,22 @@
 <div id = "mainbody">
   {% if success %}
     <h1> Welcome {{ uni }}! </h1>
-    <h5> Your code is: {{ code }} </h5>
+    {# <h5> Your code is: {{ code }} </h5> #}
   {% else %}
     {% if reason %}
       <h1 style="color:red"> {{ reason }} </h1>
     {% endif %}
     <div id = "loginform">
-        <h5>Use your Columbia email to log in</h5>
+        <div id = 'request'>Use your Columbia email to log in</div>
         <button id='signinButton' onclick='login()' style="margin-bottom: 1em;">
           log in <i class="fa fa-google fa-lg"></i>
         </button>
-      <script>
     </div>
+      <script>
       function login() {
           var params = {
               'callback': signinCallback,
-              'clientid': '590481571447-e8rd481uo2mcspc6vuck5mndkpbfro6a.apps.googleusercontent.com',
+              'clientid': '590481571447-ok26kujfrc860q7krt86dn9mvipj0ion.apps.googleusercontent.com',
               'scope': 'https://www.googleapis.com/auth/plus.profile.emails.read',
               'requestvisibleactions': 'http://schema.org/AddAction',
               'cookiepolicy': 'single_host_origin'
@@ -41,10 +45,11 @@
           gapi.auth.signIn(params);
       }
       function signinCallback(authResult) {
+          console.log(authResult)
           if (authResult['status']['signed_in']) {
           // Update the app to reflect a signed in user
           // Hide the sign-in button now that the user is authorized, for example:
-          document.location.href = '/auth?code=' + authResult.code
+          document.location.href = '/login?code=' + authResult.code
         }
       }
     </script>
