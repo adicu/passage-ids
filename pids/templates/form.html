@@ -1,7 +1,8 @@
 {% extends "index.html" %}
 
 {% block body %}
-<h2>Submit a Quote</h2>
+<center>
+	<h2>Submit a Quote</h2>
 
 	{% for message in form.submitter.errors %}
 		<div class="flash">{{ message }}</div>
@@ -15,7 +16,7 @@
 		<div class="flash">{{ message }}</div>
 	{% endfor %}
  
-	{% for message in form.content.errors %}
+	{% for message in form.quote.errors %}
   		<div class="flash">{{ message }}</div>
 	{% endfor %}
 
@@ -38,9 +39,10 @@
 	  {{ form.class_type.label }}
 	  {{ form.class_type }}
  
-	  {{ form.content.label }}
-	  {{ form.content }}
+	  {{ form.quote.label }}
+	  {{ form.quote }}
  
 	  {{ form.submit }}
   	</form>
+</center>
 {% endblock %}

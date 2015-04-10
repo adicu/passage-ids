@@ -19,7 +19,7 @@ def generator(text):
 		content = content + " " + text[i]
 	title = titles[random.randint(0, len(titles)  - 1)]
 	class_type = random.randint(1,2)
-	return Passage(content=content, title=title, author=author, submitter="auto-create", class_type=class_type)
+	return Passage(quote=content, title=title, author=author, submitter="auto-create", class_type=class_type)
 
 def generatePassages():
 		for i in range(100):
