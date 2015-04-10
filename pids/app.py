@@ -1,11 +1,15 @@
 __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash, json
 import requests
-from schema import db, Passage, Title
+from schema import db, Passage
 import random
 from flask.ext.sqlalchemy import SQLAlchemy
 from ContactForm import QuoteForm
+from oauth2client.client import flow_from_clientsecrets
+import httplib2
+import re
+from QuoteForm import QuoteForm
 
 
 def create_app():
@@ -18,6 +22,7 @@ app, db = create_app()
 
 app.config["DEBUG"] = True
 
+app.secret_key = 'development key'
 
 @app.route("/")
 def home():
@@ -27,29 +32,37 @@ def home():
 
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
-	form = QuoteForm()
-	if request.method == 'POST':
-		quote = Passage(content = form.content, title = form.title, author = form.author)
-		db.session.add(quote)
-		db.session.commit()
-		return render_template('form.html', form = form)
-	elif request.method == 'GET':
-		return render_template('form.html', form = form)
-
-# @app.route("/login", methods = ['GET', 'POST'])
-# def login():
-# 	if request.method == "POST":	
-# 		return render_template("login.html")
+    form = QuoteForm()
+    if request.method == 'POST':
+        if form.validate() == False:
+            flash('All fields are required.')
+            return render_template('form.html', form=form)
+        if form.class_type.data == 0:
+            flash('Please choose a class: Lit Hum or CC.')
+            return render_template('form.html', form=form)
+        quote = Passage(quote=form.quote.data, title=form.title.data, author=form.author.data, submitter=form.submitter.data, class_type=form.class_type.data)
+        db.session.add(quote)
+        db.session.commit()
+        form.quote.data = None
+        form.title.data = None
+        form.author.data = None
+        form.class_type.data = 0
+        return render_template('form.html', form = form)
+    elif request.method == 'GET':
+        return render_template('form.html', form = form)
 
 @app.route("/", methods = ['GET', 'POST'])
 def bringCC():
-	if request.method == "POST":
-		randQuote = content[random.randint(0, len(content) - 1)]	
-		return render_template("content.html", content2 = randQuote)
+    if request.method == "POST":
+        content = Passage.query.all()
+        randQuote = content[random.randint(0, len(content) - 1)]	
+        return render_template("content.html", content2 = randQuote)
 
 @app.errorhandler(404)
 def page_not_found(error):
     return "Sorry, this page was not found.", 404
+
+CU_EMAIL_REGEX = r"^(?P<uni>[a-z\d]+)@.*(columbia|barnard)\.edu$"
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
@@ -65,44 +78,37 @@ def login():
     if not code:
         return render_template('auth.html',
                                success=False)
+    print code
+    # Exchange code for email address.
+    # Get Google+ ID.
+    oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+    oauth_flow.redirect_uri = 'postmessage'
+    credentials = oauth_flow.step2_exchange(code)
+    gplus_id = credentials.id_token['sub']
 
-    try:
-        # Exchange code for email address.
-        # Get Google+ ID.
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
-        oauth_flow.redirect_uri = 'postmessage'
-        credentials = oauth_flow.step2_exchange(code)
-        gplus_id = credentials.id_token['sub']
+    # Get first email address from Google+ ID.
+    http = httplib2.Http()
+    http = credentials.authorize(http)
 
-        # Get first email address from Google+ ID.
-        http = httplib2.Http()
-        http = credentials.authorize(http)
+    h, content = http.request('https://www.googleapis.com/plus/v1/people/' + gplus_id, 'GET')
+    data = json.loads(content)
+    email = data["emails"][0]["value"]
 
-        h, content = http.request('https://www.googleapis.com/plus/v1/people/' + gplus_id, 'GET')
-        data = json.loads(content)
-        email = data["emails"][0]["value"]
+    # Verify email is valid.
+    regex = re.match(CU_EMAIL_REGEX, email)
 
-        # Verify email is valid.
-        regex = re.match(CU_EMAIL_REGEX, email)
-
-        if not regex:
-            return render_template('auth.html',
-                                   success=False,
-                                   reason="You need to log in with your "
-                                   + "Columbia or Barnard email! You logged "
-                                   + "in with: "
-                                   + email)
-
-        # Get UNI and ask database for code.
-        uni = regex.group('uni')
-        code = db.get_oauth_code_for_uni(g.cursor, uni)
-        return render_template('auth.html', success=True, uni=uni, code=code)
-    except Exception as e:
-        # TODO: log errors3
-        print e
+    if not regex:
         return render_template('auth.html',
                                success=False,
-                               reason="An error occurred. Please try again.")
+                               reason="You need to log in with your "
+                               + "Columbia or Barnard email! You logged "
+                               + "in with: "
+                               + email)
+
+    # Get UNI and ask database for code.
+    uni = regex.group('uni')
+    return render_template('auth.html', success=True, uni=uni, code=code)
+    
 
 if __name__ == '__main__':
 	app.run(host = '0.0.0.0')

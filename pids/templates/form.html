@@ -1,15 +1,48 @@
 {% extends "index.html" %}
+
 {% block body %}
-<h2>Contact</h2>
+<center>
+	<h2>Submit a Quote</h2>
+
+	{% for message in form.submitter.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+ 
+	{% for message in form.title.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+ 
+	{% for message in form.author.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+ 
+	{% for message in form.quote.errors %}
+  		<div class="flash">{{ message }}</div>
+	{% endfor %}
+
+	{% for message in form.class_type.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+
   	<form action="/form" method=POST>
- 	{{ form.title.label }}
-	{{ form.author }}
-	{{ form.author.label }}
-	{{ form.author }}
+      {{ form.hidden_tag() }}
+
+ 	  {{ form.submitter.label }}
+  	  {{ form.submitter }}
  
-	{{ form.content.label }}
-	{{ form.content }}
+ 	  {{ form.title.label }}
+	  {{ form.title }}
+
+	  {{ form.author.label }}
+	  {{ form.author }}
+
+	  {{ form.class_type.label }}
+	  {{ form.class_type }}
  
-	{{ form.submit }}
+	  {{ form.quote.label }}
+	  {{ form.quote }}
+ 
+	  {{ form.submit }}
   	</form>
+</center>
 {% endblock %}
