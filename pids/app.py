@@ -2,10 +2,9 @@ __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request, flash, json
 import requests
-from schema import db, Passage
+from schema import db, Passage, User
 import random
 from flask.ext.sqlalchemy import SQLAlchemy
-from ContactForm import QuoteForm
 from oauth2client.client import flow_from_clientsecrets
 import httplib2
 import re
