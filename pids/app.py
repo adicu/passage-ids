@@ -1,6 +1,6 @@
 __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 import requests
 from schema import db, Passage
 import random
@@ -30,6 +30,9 @@ def home():
 def form():
     form = QuoteForm()
     if request.method == 'POST':
+        if form.validate() == False:
+            flash('All fields are required.')
+            return render_template('form.html', form=form)
         quote = Passage(content=form.content.data, title=form.title.data, author=form.author.data, submitter=form.submitter.data)
         db.session.add(quote)
         db.session.commit()

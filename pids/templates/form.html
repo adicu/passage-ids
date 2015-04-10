@@ -2,6 +2,23 @@
 
 {% block body %}
 <h2>Submit a Quote</h2>
+
+	{% for message in form.submitter.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+ 
+	{% for message in form.title.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+ 
+	{% for message in form.author.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+ 
+	{% for message in form.content.errors %}
+  		<div class="flash">{{ message }}</div>
+	{% endfor %}
+
   	<form action="/form" method=POST>
       {{ form.hidden_tag() }}
 
