@@ -79,42 +79,36 @@ def login():
         return render_template('auth.html',
                                success=False)
     print code
-    try:
     # Exchange code for email address.
     # Get Google+ ID.
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
-        oauth_flow.redirect_uri = 'postmessage'
-        credentials = oauth_flow.step2_exchange(code)
-        gplus_id = credentials.id_token['sub']
+    oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+    oauth_flow.redirect_uri = 'postmessage'
+    credentials = oauth_flow.step2_exchange(code)
+    gplus_id = credentials.id_token['sub']
 
-        # Get first email address from Google+ ID.
-        http = httplib2.Http()
-        http = credentials.authorize(http)
+    # Get first email address from Google+ ID.
+    http = httplib2.Http()
+    http = credentials.authorize(http)
 
-        h, content = http.request('https://www.googleapis.com/plus/v1/people/' + gplus_id, 'GET')
-        data = json.loads(content)
-        email = data["emails"][0]["value"]
-        
-        # Verify email is valid.
-        regex = re.match(CU_EMAIL_REGEX, email)
+    h, content = http.request('https://www.googleapis.com/plus/v1/people/' + gplus_id, 'GET')
+    data = json.loads(content)
+    email = data["emails"][0]["value"]
 
-        if not regex:
-            return render_template('auth.html',
-                                   success=False,
-                                   reason="You need to log in with your "
-                                   + "Columbia or Barnard email! You logged "
-                                   + "in with: "
-                                   + email)
+    # Verify email is valid.
+    regex = re.match(CU_EMAIL_REGEX, email)
 
-        # Get UNI and ask database for code.
-        uni = regex.group('uni')
-        return render_template('auth.html', success=True, uni=uni, code=code)
-    except Exception as e:
-        # TODO: log errors3
-        print e
+    if not regex:
         return render_template('auth.html',
                                success=False,
-                               reason="An error occurred. Please try again.")
+                               reason="You need to log in with your "
+                               + "Columbia or Barnard email! You logged "
+                               + "in with: "
+                               + email)
+
+    # Get UNI and ask database for code.
+    uni = regex.group('uni')
+    return render_template('auth.html', success=True, uni=uni, code=code)
+    
 
 if __name__ == '__main__':
 	app.run(host = '0.0.0.0')
