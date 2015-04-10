@@ -2,10 +2,10 @@ __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
 from flask import Flask, render_template, request
 import requests
-from schema import db, Passage, Title
+from schema import db, Passage
 import random
 from flask.ext.sqlalchemy import SQLAlchemy
-from ContactForm import QuoteForm
+from QuoteForm import QuoteForm
 
 
 def create_app():
@@ -30,10 +30,12 @@ def home():
 def form():
     form = QuoteForm()
     if request.method == 'POST':
-        print(form.content.data)
-        quote = Passage(content=form.content.data, title=form.title.data, author=form.author.data)
+        quote = Passage(content=form.content.data, title=form.title.data, author=form.author.data, submitter=form.submitter.data)
         db.session.add(quote)
         db.session.commit()
+        form.content.data = None
+        form.title.data = None
+        form.author.data = None
         return render_template('form.html', form = form)
     elif request.method == 'GET':
         return render_template('form.html', form = form)
