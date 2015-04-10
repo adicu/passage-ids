@@ -33,12 +33,16 @@ def form():
         if form.validate() == False:
             flash('All fields are required.')
             return render_template('form.html', form=form)
-        quote = Passage(content=form.content.data, title=form.title.data, author=form.author.data, submitter=form.submitter.data)
+        if form.class_type.data == 0:
+            flash('Please choose a class: Lit Hum or CC.')
+            return render_template('form.html', form=form)
+        quote = Passage(content=form.content.data, title=form.title.data, author=form.author.data, submitter=form.submitter.data, class_type=form.class_type.data)
         db.session.add(quote)
         db.session.commit()
         form.content.data = None
         form.title.data = None
         form.author.data = None
+        form.class_type.data = 0
         return render_template('form.html', form = form)
     elif request.method == 'GET':
         return render_template('form.html', form = form)

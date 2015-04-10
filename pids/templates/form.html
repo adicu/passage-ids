@@ -19,6 +19,10 @@
   		<div class="flash">{{ message }}</div>
 	{% endfor %}
 
+	{% for message in form.class_type.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+
   	<form action="/form" method=POST>
       {{ form.hidden_tag() }}
 
@@ -30,6 +34,9 @@
 
 	  {{ form.author.label }}
 	  {{ form.author }}
+
+	  {{ form.class_type.label }}
+	  {{ form.class_type }}
  
 	  {{ form.content.label }}
 	  {{ form.content }}
