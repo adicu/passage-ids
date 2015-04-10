@@ -12,6 +12,7 @@ class Passage(db.Model):
 	title = db.Column(db.String(128), nullable=False)
 	author = db.Column(db.String(100), nullable=False)
 	submitter = db.Column(db.String(200), nullable=False)
+	class_type = db.Column(db.Integer(), nullable=False)
 
 	def to_JSON(self):
 		return {
