@@ -19,5 +19,15 @@ class Passage(db.Model):
 			"quote": self.quote,
 			"title": self.title,
 			"author": self.author,
-			"submitter": self.submitter
+			"submitter": self.submitter,
+			"class_type": self.class_type
 		}
+
+
+class User(db.Model):
+	__tablename__ = "User"
+	__searchable__ = ["uni"]
+
+	id = db.Column(db.Integer, primary_key = True)
+
+	uni = db.Column(db.String(100), nullable = False)
