@@ -16,8 +16,8 @@ class Passage(db.Model):
 
 	def to_JSON(self):
 		return {
-		"quote": self.quote,
-		"title": self.title,
-		"author": self.author,
-		"submitter": self.submitter
+			"quote": self.quote,
+			"title": self.title,
+			"author": self.author,
+			"submitter": self.submitter
 		}

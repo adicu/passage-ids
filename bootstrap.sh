@@ -12,5 +12,7 @@ sudo pip install flask-whooshalchemy
 sudo pip install wtforms
 sudo pip install flask-WTF
 sudo pip install sqlite3
+sudo pip install flask-wtf
+sudo pip install oauth2client
 
 echo hello
