@@ -8,7 +8,7 @@ class Passage(db.Model):
 
 	id = db.Column(db.Integer, primary_key= True)
 
-	content= db.Column(db.String(1500), nullable=False)
+	quote= db.Column(db.String(1500), nullable=False)
 	title = db.Column(db.String(128), nullable=False)
 	author = db.Column(db.String(100), nullable=False)
 	submitter = db.Column(db.String(200), nullable=False)
@@ -16,7 +16,7 @@ class Passage(db.Model):
 
 	def to_JSON(self):
 		return {
-		"content": self.content,
+		"quote": self.quote,
 		"title": self.title,
 		"author": self.author,
 		"submitter": self.submitter
