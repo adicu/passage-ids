@@ -3,11 +3,17 @@
 	<div id="name">
 		<a href = "/">Passage ID</a>
 	</div>
-	<div id="login">
-			<form action="/login" method="post"> 
-            	<button type="submit" id = "login">Login <i class="fa fa-sign-in fa-lg"></i></button>
-        	</form>
-	</div>
+	{% if loggedIn %}
+		<div id="login">
+	        {{ uni }}
+		</div>
+	{% else %}
+		<div id="login">
+				<form action="/login" method="post"> 
+	            	<button type="submit" id = "login">Login &nbsp;<i class="fa fa-sign-in fa-lg"></i></button>
+	        	</form>
+		</div>
+	{% endif %}
 {% endblock %}
 
 {% block body %}
@@ -24,7 +30,7 @@
 				</form>
 			</div>
 			<div id="text">
-			    {{content2.quote}}
+			    {{passage_info.quote}}
 			</div>
 			<div id="add_content" class = "choice">
 				<form action="/form" method="post">
@@ -39,7 +45,8 @@
 			</div>
 			<div id="answer_choices">
 				<div id="text">
-					<p>{{content2.title}}</p>
+					<p>{{passage_info.title}}</p>
+					
 				</div>
 			</div>
 		</div>
