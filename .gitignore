@@ -10,4 +10,5 @@
 *.py~
 *.pyc
 
+.DS_Store
 .vagrant
