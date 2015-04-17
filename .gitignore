@@ -12,4 +12,5 @@
 /pids/flask-session
 
 
+.DS_Store
 .vagrant

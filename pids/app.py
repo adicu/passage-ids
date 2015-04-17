@@ -9,7 +9,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from oauth2client.client import flow_from_clientsecrets
 import httplib2
 import re
-from QuoteForm import QuoteForm
+from SubmissionForm import SubmissionForm
 
 def create_app():
     app = Flask(__name__)
@@ -41,7 +41,7 @@ def home():
 
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
-    form = QuoteForm()
+    form = SubmissionForm()
     if request.method == 'POST':
         if form.validate() == False:
             flash('All fields are required.')
@@ -80,7 +80,6 @@ def setCC():
 def page_not_found(error):
     return "Sorry, this page was not found.", 404
 
-CU_EMAIL_REGEX = r"^(?P<uni>[a-z\d]+)@.*(columbia|barnard)\.edu$"
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
@@ -91,48 +90,45 @@ def login():
     :return: An html page with an auth code.
     :rtype: flask.Response
     """
+
+    CU_EMAIL_REGEX = r"^(?P<uni>[a-z\d]+)@.*(columbia|barnard)\.edu$"
     # Get code from params.
     code = request.args.get('code')
     if not code:
         return render_template('auth.html',
                                success=False)
     print code
-    try:
     # Exchange code for email address.
     # Get Google+ ID.
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
-        oauth_flow.redirect_uri = 'postmessage'
-        credentials = oauth_flow.step2_exchange(code)
-        gplus_id = credentials.id_token['sub']
+    oauth_flow = flow_from_clientsecrets('secrets.json', scope='')
 
-        # Get first email address from Google+ ID.
-        http = httplib2.Http()
-        http = credentials.authorize(http)
+    oauth_flow.redirect_uri = 'postmessage'
+    credentials = oauth_flow.step2_exchange(code)
+    gplus_id = credentials.id_token['sub']
 
-        h, content = http.request('https://www.googleapis.com/plus/v1/people/' + gplus_id, 'GET')
-        data = json.loads(content)
-        email = data["emails"][0]["value"]
-        
-        # Verify email is valid.
-        regex = re.match(CU_EMAIL_REGEX, email)
+    # Get first email address from Google+ ID.
+    http = httplib2.Http()
+    http = credentials.authorize(http)
 
-        if not regex:
-            return render_template('auth.html',
-                                   success=False,
-                                   reason="You need to log in with your "
-                                   + "Columbia or Barnard email! You logged "
-                                   + "in with: "
-                                   + email)
+    h, content = http.request('https://www.googleapis.com/plus/v1/people/' + gplus_id, 'GET')
+    data = json.loads(content)
+    email = data["emails"][0]["value"]
 
-        # Get UNI and ask database for code.
-        uni = regex.group('uni')
-        return render_template('auth.html', success=True, uni=uni, code=code)
-    except Exception as e:
-        # TODO: log errors3
-        print e
+    # Verify email is valid.
+    regex = re.match(CU_EMAIL_REGEX, email)
+
+    if not regex:
         return render_template('auth.html',
                                success=False,
-                               reason="An error occurred. Please try again.")
+                               reason="You need to log in with your "
+                               + "Columbia or Barnard email! You logged "
+                               + "in with: "
+                               + email)
+
+    # Get UNI and ask database for code.
+    uni = regex.group('uni')
+    return render_template('auth.html', success=True, uni=uni, code=code)
+    
 
 if __name__ == '__main__':
     app.config['SESSION_TYPE'] = 'filesystem'
