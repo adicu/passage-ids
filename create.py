@@ -7,7 +7,7 @@ authors = [ "Homer", "Virgil", "Dante", "Virginia Woolf", "Herodotus", "Thucydid
 
 titles = [ "The Iliad", "The Odyssey", "Oresteia", "Oedipus Rex", "The Medea", "Genesis", "Lysistrata", "The Histories", "The Symposium", "Job", "Luke/John", "The Aeneid", "Confessions", "The Divine Comedy", "Pride and Prejudice", "Crime and Punishment"]
 
-categories = [ "Greek", "Tragedy", "History", "Bible", "Roman", "Novel" ]
+categories = [ "Greek Tragedy", "Play", "Epic", "History", "Roman", "Novel", "Bible" ]
 
 def split(text):
 	words = text.split()

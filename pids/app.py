@@ -11,7 +11,7 @@ import httplib2
 import re
 from SubmissionForm import SubmissionForm
 from MultipleChoiceForm import MultipleChoiceForm
-from categories import categories
+from categories import lithum
 
 def create_app():
     app = Flask(__name__)
@@ -40,8 +40,8 @@ def home():
         randQuote = content[random.randint(0, len(content) - 1)]
     category = randQuote.category
     choices = []
-    for i in range(len(categories[category])):
-        choices.append((i, categories[category][i]))
+    for i in range(len(lithum[category])):
+        choices.append((i, lithum[category][i]))
     form.choices.choices = choices
     return render_template('content.html', content2 = randQuote, form = form)
 
