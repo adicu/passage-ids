@@ -22,9 +22,6 @@ app, db = create_app()
 app.config["DEBUG"] = True
 sess = Session()
 
-
-
-
 @app.before_request
 def before_request():
     if session.get('type', None) is None:
