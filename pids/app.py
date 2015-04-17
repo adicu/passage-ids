@@ -10,6 +10,8 @@ from oauth2client.client import flow_from_clientsecrets
 import httplib2
 import re
 from SubmissionForm import SubmissionForm
+from MultipleChoiceForm import MultipleChoiceForm
+from categories import categories
 
 def create_app():
     app = Flask(__name__)
@@ -29,18 +31,19 @@ def before_request():
 
 @app.route("/")
 def home():
-	form = MultipleChoiceForm()
-    print(session['type'])
+    form = MultipleChoiceForm()
     if session['type'] is 0:
         content = Passage.query.all()
         randQuote = content[random.randint(0, len(content) - 1)]
-        g.quote = randQuote
     else:
         content = Passage.query.filter_by(class_type=session['type']).all()
         randQuote = content[random.randint(0, len(content) - 1)]
-        g.quote = randQuote
-    elif request.method == 'GET';
-    return render_template('content.html', content2 = g.quote, form = form)
+    category = randQuote.category
+    choices = []
+    for i in range(len(categories[category])):
+        choices.append((i, categories[category][i]))
+    form.choices.choices = choices
+    return render_template('content.html', content2 = randQuote, form = form)
 
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
