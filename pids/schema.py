@@ -35,3 +35,10 @@ class User(db.Model):
 	id = db.Column(db.Integer, primary_key = True)
 
 	uni = db.Column(db.String(100), nullable = False)
+	gplus_id = db.Column(db.String(100), nullable = False)
+
+	def to_JSON(self):
+		return {
+			"uni" : self.uni,
+			"gplus_id": self.gplus_id
+		}
