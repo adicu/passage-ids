@@ -14,5 +14,6 @@ sudo pip install flask-WTF
 sudo pip install sqlite3
 sudo pip install flask-wtf
 sudo pip install oauth2client
+sudo pip install Flask-Session
 
 echo hello

@@ -1,6 +1,7 @@
 __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, flash, json
+from flask import Flask, render_template, request, flash, json, session, redirect
+from flask.ext.session import Session
 import requests
 from schema import db, Passage, User
 import random
@@ -10,24 +11,33 @@ import httplib2
 import re
 from SubmissionForm import SubmissionForm
 
-
 def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
     db.init_app(app)
     return app, db
 
+
 app, db = create_app()
-
 app.config["DEBUG"] = True
+sess = Session()
 
-app.secret_key = 'development key'
+@app.before_request
+def before_request():
+    if session.get('type', None) is None:
+        session['type'] = 0
 
 @app.route("/")
 def home():
-	content = Passage.query.all()
-	randQuote = content[random.randint(0, len(content) - 1)]
-	return render_template("content.html", content2 = randQuote)
+    print(session['type'])
+    if session['type'] is 0:
+        content = Passage.query.all()
+        randQuote = content[random.randint(0, len(content) - 1)]
+    else:
+        content = Passage.query.filter_by(class_type=session['type']).all()
+        randQuote = content[random.randint(0, len(content) - 1)]
+
+    return render_template("content.html", content2 = randQuote)
 
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
@@ -39,7 +49,11 @@ def form():
         if form.class_type.data == 0:
             flash('Please choose a class: Lit Hum or CC.')
             return render_template('form.html', form=form)
-        quote = Passage(quote=form.quote.data, title=form.title.data, author=form.author.data, submitter=form.submitter.data, class_type=form.class_type.data)
+        quote = Passage(quote=form.quote.data,
+                        title=form.title.data,
+                        author=form.author.data,
+                        submitter=form.submitter.data,
+                        class_type=form.class_type.data)
         db.session.add(quote)
         db.session.commit()
         form.quote.data = None
@@ -50,12 +64,17 @@ def form():
     elif request.method == 'GET':
         return render_template('form.html', form = form)
 
-@app.route("/", methods = ['GET', 'POST'])
-def bringCC():
+@app.route("/LitHum", methods = ['POST'])
+def setLH():
     if request.method == "POST":
-        content = Passage.query.all()
-        randQuote = content[random.randint(0, len(content) - 1)]	
-        return render_template("content.html", content2 = randQuote)
+        session['type'] = 1
+        return redirect('/')
+
+@app.route("/CC", methods = ['POST'])
+def setCC():
+    if request.method == "POST":
+        session['type'] = 2
+        return redirect('/')
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -112,4 +131,7 @@ def login():
     
 
 if __name__ == '__main__':
-	app.run(host = '0.0.0.0')
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SECRET_KEY'] = 'secret key'
+    sess.init_app(app)
+    app.run(host = '0.0.0.0')
