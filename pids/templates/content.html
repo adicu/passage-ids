@@ -1,4 +1,5 @@
 {% extends "index.html" %}
+
 {% block header %}
 	<div id="name">
 		<a href = "/">Passage ID</a>
@@ -16,16 +17,20 @@
 	{% endif %}
 {% endblock %}
 
+{% block head %}
+	<link rel="stylesheet" href="../static/css/form.css">
+{% endblock %}
+
 {% block body %}
 	<div id="content">
 		<div id="static">
 			<div id="lithum" class = "choice">
-				<form action="/" method="post">
+				<form action="/LitHum" method="post">
 				    <button type= "submit" id = "choose_passage">Lithum</button>
 				</form>
 			</div>
 			<div id="CC" class = "choice">
-				<form action="/" method="post">
+				<form action="/CC" method="post">
 				    <button type= "submit" id = "choose_passage">CC</button>
 				</form>
 			</div>
@@ -33,7 +38,7 @@
 			    {{passage_info.quote}}
 			</div>
 			<div id="add_content" class = "choice">
-				<form action="/form" method="post">
+				<form action="/form" method="get">
 				    <button type= "submit" id = "choose_passage"> Add Passage
 				    </button>
 				</form>
@@ -41,12 +46,19 @@
 		</div>
 		<div id="quiz">
 			<div id="prompt">
-				<p>Choose the author of the book from which this quote was taken </p>
+				<p>Choose the title of the book from which this quote was taken </p>
 			</div>
 			<div id="answer_choices">
 				<div id="text">
-					<p>{{passage_info.title}}</p>
-					
+					<div id = 'title'>
+						{{content2.title}}	
+					</div>
+					<div id = 'multiple_choices'>
+						{{ form.choices.label }}
+						{{ form.choices }}
+
+						{{ form.submit }}
+					</div>
 				</div>
 			</div>
 		</div>
