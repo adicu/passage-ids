@@ -13,6 +13,7 @@ class Passage(db.Model):
 	author = db.Column(db.String(100), nullable=False)
 	submitter = db.Column(db.String(200), nullable=False)
 	class_type = db.Column(db.Integer(), nullable=False)
+	percent_correct = db.Column(db.Integer(), nullable=True)
 
 	def to_JSON(self):
 		return {
@@ -20,7 +21,8 @@ class Passage(db.Model):
 			"title": self.title,
 			"author": self.author,
 			"submitter": self.submitter,
-			"class_type": self.class_type
+			"class_type": self.class_type,
+			"percent_correct": self.percent_correct
 		}
 
 
