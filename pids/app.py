@@ -1,6 +1,6 @@
 __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, flash, json, session, redirect
+from flask import Flask, render_template, request, flash, json, session, redirect, g
 from flask.ext.session import Session
 import requests
 from schema import db, Passage, User
@@ -29,15 +29,18 @@ def before_request():
 
 @app.route("/")
 def home():
+	form = MultipleChoiceForm()
     print(session['type'])
     if session['type'] is 0:
         content = Passage.query.all()
         randQuote = content[random.randint(0, len(content) - 1)]
+        g.quote = randQuote
     else:
         content = Passage.query.filter_by(class_type=session['type']).all()
         randQuote = content[random.randint(0, len(content) - 1)]
-
-    return render_template("content.html", content2 = randQuote)
+        g.quote = randQuote
+    elif request.method == 'GET';
+    return render_template('content.html', content2 = g.quote, form = form)
 
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
