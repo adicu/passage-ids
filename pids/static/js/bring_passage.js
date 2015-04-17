@@ -1,12 +1,12 @@
-$(window).onload(function(){
-	page();
-	$("#name").click(){
-		this.css({
+// $(window).onload(function(){
+// 	page();
+// 	// $("#name").click(){
+// 	// 	this.css({
 			
-		})
-	}
-});
+// 	// 	})
+// 	// }
+// });
 
-var page = function(){
+// var page = function(){
 
-}
+// }
