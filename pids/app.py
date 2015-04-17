@@ -8,7 +8,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from oauth2client.client import flow_from_clientsecrets
 import httplib2
 import re
-from QuoteForm import QuoteForm
+from SubmissionForm import SubmissionForm
 
 
 def create_app():
@@ -31,7 +31,7 @@ def home():
 
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
-    form = QuoteForm()
+    form = SubmissionForm()
     if request.method == 'POST':
         if form.validate() == False:
             flash('All fields are required.')
@@ -61,7 +61,6 @@ def bringCC():
 def page_not_found(error):
     return "Sorry, this page was not found.", 404
 
-CU_EMAIL_REGEX = r"^(?P<uni>[a-z\d]+)@.*(columbia|barnard)\.edu$"
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
@@ -72,6 +71,8 @@ def login():
     :return: An html page with an auth code.
     :rtype: flask.Response
     """
+
+    CU_EMAIL_REGEX = r"^(?P<uni>[a-z\d]+)@.*(columbia|barnard)\.edu$"
     # Get code from params.
     code = request.args.get('code')
     if not code:
@@ -80,7 +81,8 @@ def login():
     print code
     # Exchange code for email address.
     # Get Google+ ID.
-    oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+    oauth_flow = flow_from_clientsecrets('secrets.json', scope='')
+
     oauth_flow.redirect_uri = 'postmessage'
     credentials = oauth_flow.step2_exchange(code)
     gplus_id = credentials.id_token['sub']
