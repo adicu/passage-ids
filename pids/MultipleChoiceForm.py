@@ -1,12 +1,6 @@
-from wtforms import TextField, TextAreaField, SubmitField, SelectField, validators, ValidationError
+from wtforms import RadioField, SubmitField, validators, ValidationError
 from flask.ext.wtf import Form
 
 class MultipleChoiceForm(Form):
-	passage= 
-	title1= 
-	title1box=
-	title2=
-	title2box=
-	title3= 
-	title3box =
+	choices = RadioField("What work is the quote from?", coerce = int, validators = [validators.Required("Please select a work.")])
 	submit = SubmitField("Submit Answer")

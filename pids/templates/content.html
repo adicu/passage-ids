@@ -1,4 +1,5 @@
 {% extends "index.html" %}
+
 {% block header %}
 	<div id="name">
 		<a href = "/">Passage ID</a>
@@ -8,6 +9,10 @@
             	<button type="submit" id = "login">Login <i class="fa fa-sign-in fa-lg"></i></button>
         	</form>
 	</div>
+{% endblock %}
+
+{% block head %}
+	<link rel="stylesheet" href="../static/css/form.css">
 {% endblock %}
 
 {% block body %}
@@ -39,7 +44,15 @@
 			</div>
 			<div id="answer_choices">
 				<div id="text">
-					<p>{{content2.title}}</p>
+					<div id = 'title'>
+						{{content2.title}}	
+					</div>
+					<div id = 'multiple_choices'>
+						{{ form.choices.label }}
+						{{ form.choices }}
+
+						{{ form.submit }}
+					</div>
 				</div>
 			</div>
 		</div>

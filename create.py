@@ -7,6 +7,8 @@ authors = [ "Homer", "Virgil", "Dante", "Virginia Woolf", "Herodotus", "Thucydid
 
 titles = [ "The Iliad", "The Odyssey", "Oresteia", "Oedipus Rex", "The Medea", "Genesis", "Lysistrata", "The Histories", "The Symposium", "Job", "Luke/John", "The Aeneid", "Confessions", "The Divine Comedy", "Pride and Prejudice", "Crime and Punishment"]
 
+categories = [ "Greek", "Tragedy", "History", "Bible", "Roman", "Novel" ]
+
 def split(text):
 	words = text.split()
 	return words
@@ -19,7 +21,8 @@ def generator(text):
 		content = content + " " + text[i]
 	title = titles[random.randint(0, len(titles)  - 1)]
 	class_type = random.randint(1,2)
-	return Passage(quote=content, title=title, author=author, submitter="auto-create", class_type=class_type)
+	category = categories[random.randint(0, len(categories) - 1)]
+	return Passage(quote=content, title=title, author=author, submitter="auto-create", class_type=class_type, category=category)
 
 def generatePassages():
 		for i in range(100):
