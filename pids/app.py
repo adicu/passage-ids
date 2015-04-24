@@ -11,7 +11,7 @@ import httplib2
 import re
 from SubmissionForm import SubmissionForm
 from MultipleChoiceForm import MultipleChoiceForm
-from categories import lithum, lithum_titles
+from categories import lithum1, lithum2, lithum_titles
 
 def create_app():
     app = Flask(__name__)
@@ -50,26 +50,29 @@ def home():
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
     form = SubmissionForm()
+    form.title.choices = [("Choose", "Choose Title")] + lithum_titles["fall"] + lithum_titles["spring"]
     if request.method == 'POST':
-        if form.validate() == False:
-            flash('All fields are required.')
-            return render_template('form.html', form=form)
-        if form.class_type.data == 0:
-            flash('Please choose a class: Lit Hum or CC.')
-            return render_template('form.html', form=form)
-        quote = Passage(quote=form.quote.data,
+		if form.validate() == False:
+			flash('All fields are required.')
+			return render_template('form.html', form=form)
+		if form.class_type.data == 0 or	 form.title.data == "Choose":
+			if form.class_type.data == 0:
+				flash("Please pick CC or Lit Hum.")
+			if form.title.data is "Choose":
+				flash("Please enter the title of the work.")
+        	return render_template('form.html', form=form)
+		quote = Passage(quote=form.quote.data,
                         title=form.title.data,
                         submitter=form.submitter.data,
                         class_type=form.class_type.data)
-        db.session.add(quote)
-        db.session.commit()
-        form.quote.data = None
-        form.title.data = None
-        form.class_type.data = 0
-        return render_template('form.html', form = form)
+		db.session.add(quote)
+		db.session.commit()
+		form.quote.data = None
+		form.title.data = "Choose"
+		form.class_type.data = 0
+		return render_template('form.html', form = form)
     elif request.method == 'GET':
-    	form.title.choices = lithum_titles["fall"]
-        return render_template('form.html', form = form)
+		return render_template('form.html', form = form)
 
 @app.route("/LitHum", methods = ['POST'])
 def setLH():

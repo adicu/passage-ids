@@ -1,5 +1,3 @@
 sh bootstrap.sh
-
-cd pids/
-
-python app.py
+python create.py
+python run.py
