@@ -4,10 +4,16 @@ sudo apt-get install -y python-pip
 sudo apt-get install -y vim
 sudo pip install flask
 
-sudo pip install -r /vagrant/requirements.txt
+sudo pip install -r /vagrant/config/requirements.txt
+
 sudo pip install requests
 sudo pip install flask-sqlalchemy
 sudo pip install flask-whooshalchemy
-
+sudo pip install wtforms
+sudo pip install flask-WTF
+sudo pip install sqlite3
+sudo pip install flask-wtf
+sudo pip install oauth2client
+sudo pip install Flask-Session
 
 echo hello

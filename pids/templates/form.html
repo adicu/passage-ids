@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+{% block head %}
+	<link rel="stylesheet" href="../static/css/form.css">
+{% endblock %}
+
+{% block header %}
+	<div id="name">
+		<a href = "/">Passage ID</a>
+	</div>
+{% endblock %}
+
+{% block body %}
+<center>
+	<h2>Submit a Quote</h2>
+ 
+	{% for message in form.title.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+ 
+	{% for message in form.author.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+ 
+	{% for message in form.quote.errors %}
+  		<div class="flash">{{ message }}</div>
+	{% endfor %}
+
+	{% for message in form.class_type.errors %}
+		<div class="flash">{{ message }}</div>
+	{% endfor %}
+
+  	<form action="/form" method=POST>
+      {{ form.hidden_tag() }}
+
+ 
+ 	  {{ form.title.label }}
+	  {{ form.title }}
+
+	  {{ form.author.label }}
+	  {{ form.author }}
+
+	  {{ form.class_type.label }}
+	  {{ form.class_type }}
+ 
+	  {{ form.quote.label }}
+	  {{ form.quote }}
+ 
+	  {{ form.submit }}
+  	</form>
+</center>
+{% endblock %}

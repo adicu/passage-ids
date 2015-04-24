@@ -8,5 +8,9 @@
 *.pyc
 *.swp
 *.py~
+*.pyc
+/pids/flask-session
 
+
+.DS_Store
 .vagrant
