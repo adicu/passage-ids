@@ -1,0 +1,30 @@
+div#quiz #content{
+	margin-top: 5%;
+	width: 90%;
+}
+
+div#multiple_choices{
+	width: 100%;
+}
+
+div#multiple_choices ul#choices{
+	padding: 0;
+	padding-top: 1%;
+	margin-left: 20%;
+}
+
+div#multiple_choices ul#choices li{
+	list-style-type: none;
+	text-align: left;
+	padding: 0;
+	padding-bottom: 5%;
+}
+
+div#multiple_choices input{
+ 	padding: 10px;
+	border-color: #ccc;
+	border-style: solid;
+ 	background-color: transparent;
+}
+
+
