@@ -1,6 +1,7 @@
 __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, flash, json, g, session
+from flask import Flask, render_template, request, flash, json, g, session, redirect
+from flask.ext.session import Session
 import requests
 from schema import db, Passage, User
 import random
@@ -9,6 +10,8 @@ from oauth2client.client import flow_from_clientsecrets
 import httplib2
 import re
 from SubmissionForm import SubmissionForm
+from MultipleChoiceForm import MultipleChoiceForm
+from categories import lithum
 
 def create_app():
     app = Flask(__name__)
@@ -22,12 +25,54 @@ app, db = create_app()
 app.secret_key = 'development key'
 
 passage_info = None
+sess = Session()
+
+
+@app.before_request
+def lookup_current_uni():
+    g.uni = None
+    if 'gplus_id' in session:
+        gplus_id = session['gplus_id']
+        user=User.query.filter_by(gplus_id=gplus_id).all()
+        # if user is not None:    
+        #     g.uni = user[0].uni
+        #     print g.uni
+@app.before_request
+def before_request():
+    if session.get('type', None) is None:
+        session['type'] = 0
 
 @app.route("/")
 def home():
-	content = Passage.query.all()
-	passage_info = content[random.randint(0, len(content) - 1)]
-	return render_template("content.html", passage_info = passage_info)
+    form = MultipleChoiceForm()
+    if session['type'] is 0:
+        content = Passage.query.all()
+        randQuote = content[random.randint(0, len(content) - 1)]
+    else:
+        content = Passage.query.filter_by(class_type=session['type']).all()
+        randQuote = content[random.randint(0, len(content) - 1)]
+    category = randQuote.category
+    choices = []
+    for i in range(len(lithum[category])):
+        choices.append((i, lithum[category][i]))
+    form.choices.choices = choices
+    return render_template('content.html', content2=randQuote, form=form)
+
+@app.route("/CC", methods = ['POST'])
+def setCC():
+    if request.method == "POST":
+        session['type'] = 2
+        return redirect('/')
+
+@app.route("/LitHum", methods = ['POST'])
+def setLH():
+    if request.method == "POST":
+        session['type'] = 1
+        return redirect('/')
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return "Sorry, this page was not found.", 404
 
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
@@ -49,13 +94,6 @@ def form():
         return render_template('form.html', form = form)
     elif request.method == 'GET':
         return render_template('form.html', form = form)
-
-@app.route("/", methods = ['GET', 'POST'])
-def bringCC():
-    if request.method == "POST":
-        content = Passage.query.all()
-        randQuote = content[random.randint(0, len(content) - 1)]	
-        return render_template("content.html", content2 = randQuote)
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -112,16 +150,6 @@ def login():
     # print passageInfo
     return render_template('auth.html', success=True, uni=uni, code=code)
     # return render_template('content.html', loggedIn = True, uni = uni)
-
-@app.before_request
-def lookup_current_uni():
-    g.uni = None
-    if 'gplus_id' in session:
-        gplus_id = session['gplus_id']
-        user = User.query.filter_by(gplus_id=gplus_id).all()
-        if user is not None:
-            g.uni = user[0].uni
-            print g.uni
 
 def run():
     """Runs the app."""
