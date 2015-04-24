@@ -15,34 +15,21 @@ from categories import lithum1, lithum2, lithum_titles
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('pids.config')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
     db.init_app(app)
-    print app.config['HOST']
     return app, db
 
+
 app, db = create_app()
-
-app.secret_key = 'development key'
-
-passage_info = None
+app.config["DEBUG"] = True
 sess = Session()
 
-
-@app.before_request
-def lookup_current_uni():
-    g.uni = None
-    if 'gplus_id' in session:
-        gplus_id = session['gplus_id']
-        user=User.query.filter_by(gplus_id=gplus_id).all()
-        # if user is not None:    
-        #     g.uni = user[0].uni
-        #     print g.uni
 @app.before_request
 def before_request():
     if session.get('type', None) is None:
         session['type'] = 0
     if session.get('form', None) is None:
-        session['form'] = 0
+    	session['form'] = 0
 
 @app.route("/")
 def home():
@@ -58,13 +45,34 @@ def home():
     for i in range(len(lithum[category])):
         choices.append((i, lithum[category][i]))
     form.choices.choices = choices
-    return render_template('content.html', content2=randQuote, form=form)
+    return render_template('content.html', content2 = randQuote, form = form)
 
-@app.route("/CC", methods = ['POST'])
-def setCC():
-    if request.method == "POST":
-        session['type'] = 2
-        return redirect('/')
+@app.route("/form", methods = ['GET', 'POST'])
+def form():
+    form = SubmissionForm()
+    form.title.choices = [("Choose", "Choose Title")] + lithum_titles["fall"] + lithum_titles["spring"]
+    if request.method == 'POST':
+		if form.validate() == False:
+			flash('All fields are required.')
+			return render_template('form.html', form=form)
+		if form.class_type.data == 0 or	 form.title.data == "Choose":
+			if form.class_type.data == 0:
+				flash("Please pick CC or Lit Hum.")
+			if form.title.data is "Choose":
+				flash("Please enter the title of the work.")
+        	return render_template('form.html', form=form)
+		quote = Passage(quote=form.quote.data,
+                        title=form.title.data,
+                        submitter=form.submitter.data,
+                        class_type=form.class_type.data)
+		db.session.add(quote)
+		db.session.commit()
+		form.quote.data = None
+		form.title.data = "Choose"
+		form.class_type.data = 0
+		return render_template('form.html', form = form)
+    elif request.method == 'GET':
+		return render_template('form.html', form = form)
 
 @app.route("/LitHum", methods = ['POST'])
 def setLH():
@@ -72,36 +80,16 @@ def setLH():
         session['type'] = 1
         return redirect('/')
 
-@app.route("/form", methods = ['GET', 'POST'])
-def form():
-    form = SubmissionForm()
-    form.title.choices = [("Choose", "Choose Title")] + lithum_titles["fall"] + lithum_titles["spring"]
-    if request.method == 'POST':
-        if form.validate() == False:
-            flash('All fields are required.')
-            return render_template('form.html', form=form)
-        if form.class_type.data == 0 or  form.title.data == "Choose":
-            if form.class_type.data == 0:
-                flash("Please pick CC or Lit Hum.")
-            if form.title.data is "Choose":
-                flash("Please enter the title of the work.")
-            return render_template('form.html', form=form)
-        quote = Passage(quote=form.quote.data,
-                        title=form.title.data,
-                        submitter=form.submitter.data,
-                        class_type=form.class_type.data)
-        db.session.add(quote)
-        db.session.commit()
-        form.quote.data = None
-        form.title.data = "Choose"
-        form.class_type.data = 0
-        return render_template('form.html', form = form)
-    elif request.method == 'GET':
-        return render_template('form.html', form = form)
+@app.route("/CC", methods = ['POST'])
+def setCC():
+    if request.method == "POST":
+        session['type'] = 2
+        return redirect('/')
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return "Sorry, this page does not exist", 404
+    return "Sorry, this page was not found.", 404
+
 
 @app.route("/login", methods = ['GET', 'POST'])
 def login():
@@ -112,14 +100,17 @@ def login():
     :return: An html page with an auth code.
     :rtype: flask.Response
     """
+
     CU_EMAIL_REGEX = r"^(?P<uni>[a-z\d]+)@.*(columbia|barnard)\.edu$"
     # Get code from params.
     code = request.args.get('code')
     if not code:
-        return render_template('auth.html', success=False)
+        return render_template('auth.html',
+                               success=False)
+    print code
     # Exchange code for email address.
     # Get Google+ ID.
-    oauth_flow = flow_from_clientsecrets('pids/secrets.json', scope='')
+    oauth_flow = flow_from_clientsecrets('secrets.json', scope='')
 
     oauth_flow.redirect_uri = 'postmessage'
     credentials = oauth_flow.step2_exchange(code)
@@ -146,15 +137,11 @@ def login():
 
     # Get UNI and ask database for code.
     uni = regex.group('uni')
-    db.session.add(User(uni = uni, gplus_id = gplus_id))
-    db.session.commit()
-
-    session['gplus_id'] = gplus_id
-
-    # print passageInfo
     return render_template('auth.html', success=True, uni=uni, code=code)
-    # return render_template('content.html', loggedIn = True, uni = uni)
+    
 
-def run():
-    """Runs the app."""
-    app.run(host=app.config.get('HOST'), port=app.config.get('PORT'))
+if __name__ == '__main__':
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.config['SECRET_KEY'] = 'secret key'
+    sess.init_app(app)
+    app.run(host = '0.0.0.0')
