@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 lithum1 = {"Greek Tragedy": ["Medea", "Oresteia", "Oedipus the King"],
 		  "Play": ["Medea", "Oresteia", "Oedipus the King", "King Lear"],
 		  "Epic": ["Aeneid", "Odyssey", "Iliad"],
@@ -13,7 +12,7 @@ lithum2 =  {"Ancient": ["The Aneid", "Metamorphoses"],
 		"Medieval": ["Confessions", "Don Quixote", "King Lear"],
 		"Novel": ["Essays", "Pride and Prejudice", "To the Lighthouse" ],
 		}
-=======
+
 lithum = { "fall": 
 			{
 				"Greek Tragedy": ["Medea", "Oresteia", "Oedipus the King"],
@@ -32,7 +31,6 @@ lithum = { "fall":
 				"Novel": ["Essays", "Pride and Prejudice", "To the Lighthouse" ],
 			}
 		 }
->>>>>>> 5c48b19b8325f33faabe6359d05dbe054a4fbcd8
 
 lithum_titles = { "fall": [ ("The Iliad", "The Iliad"),
 							("The Odyssey", "The Odyssey"),
