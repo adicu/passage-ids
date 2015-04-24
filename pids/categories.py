@@ -5,8 +5,8 @@ lithum1 = {"Greek Tragedy": ["Medea", "Oresteia", "Oedipus the King"],
 		  "Bible" : ["Luke", "John", "Job", "Exodus", "Genesis"], 
 		}
 
-lithum2 {"Ancient": ["The Aneid", "Metamorphoses"]
-		"Existential": ["Faust", "Crime and Punishment"]
-		"Medieval": ["Confessions", "Don Quixote", "King Lear"]
-		"Novel": ["Essays", "Pride and Prejudice", "To the Lighthouse" ]
-		}s
+lithum2 {"Ancient": ["The Aneid", "Metamorphoses"],
+		"Existential": ["Faust", "Crime and Punishment"],
+		"Medieval": ["Confessions", "Don Quixote", "King Lear"],
+		"Novel": ["Essays", "Pride and Prejudice", "To the Lighthouse" ],
+		}
