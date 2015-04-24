@@ -7,7 +7,7 @@ lithum = { "fall":
 		  		"Bible" : ["Luke", "John", "Job", "Exodus", "Genesis"], 
 		  		"Roman" : ["The Golden Ass", "Metamorphoses", "Aeneid", "Confessions"], 
 		  		"Novel" : ["Don Quixote", "Pride and Prejudice", "To the Lighthouse", "The Golden Ass"]
-			}
+			},
 		   "spring":
 		    {
 		    	"Ancient": ["The Aeneid", "Metamorphoses"],
@@ -29,7 +29,7 @@ lithum_titles = { "fall": [ ("The Iliad", "The Iliad"),
 							("Genesis", "Genesis"),
 							("Job", "Job"),
 							("Luke/John", "Luke/John") ],
-				  "spring": [("Aeneid", "The Aeneid"),
+				  "spring": [("The Aeneid", "The Aeneid"),
 				  			 ("Metamorphoses", "Metamorphoses"),
 				  			 ("Confessions", "Confessions"),
 				  			 ("The Divine Comedy", "The Divine Comedy"),
