@@ -1,34 +1,38 @@
-lithum1 = {"Greek Tragedy": ["Medea", "Oresteia", "Oedipus the King"],
-		  "Play": ["Medea", "Oresteia", "Oedipus the King", "King Lear"],
-		  "Epic": ["Aeneid", "Odyssey", "Iliad"],
-		  "History" : ["The Histories", "History of the Peloponnesian War"],
-		  "Bible" : ["Luke", "John", "Job", "Exodus", "Genesis"], 
-		  "Roman" : ["The Golden Ass", "Metamorphoses", "Aeneid", "Confessions"], 
-		  "Novel" : ["Don Quixote", "Pride and Prejudice", "To the Lighthouse", "The Golden Ass"]
-		}
+lithum = { "fall": 
+			{
+				"Greek Tragedy": ["Medea", "Oresteia", "Oedipus the King"],
+		  		"Play": ["Medea", "Oresteia", "Oedipus the King", "King Lear"],
+		  		"Epic": ["Aeneid", "Odyssey", "Iliad"],
+		  		"History" : ["The Histories", "History of the Peloponnesian War"],
+		  		"Bible" : ["Luke", "John", "Job", "Exodus", "Genesis"], 
+		  		"Roman" : ["The Golden Ass", "Metamorphoses", "Aeneid", "Confessions"], 
+		  		"Novel" : ["Don Quixote", "Pride and Prejudice", "To the Lighthouse", "The Golden Ass"]
+			}
+		   "spring":
+		    {
+		    	"Ancient": ["The Aeneid", "Metamorphoses"],
+				"Existential": ["Faust", "Crime and Punishment"],
+				"Medieval": ["Confessions", "Don Quixote", "King Lear"],
+				"Novel": ["Essays", "Pride and Prejudice", "To the Lighthouse" ],
+			}
+		 }
 
-lithum2 = { "Ancient": ["The Aeneid", "Metamorphoses"],
-			"Existential": ["Faust", "Crime and Punishment"],
-			"Medieval": ["Confessions", "Don Quixote", "King Lear"],
-			"Novel": ["Essays", "Pride and Prejudice", "To the Lighthouse" ],
-		}
-
-lithum_titles = { "fall": [ ("Iliad", "The Iliad"),
-							("Odyssey", "The Odyssey"),
+lithum_titles = { "fall": [ ("The Iliad", "The Iliad"),
+							("The Odyssey", "The Odyssey"),
 							("Oresteia", "Oresteia"),
 							("Oedipus Rex", "Oedipus Rex"),
-							("Medea", "The Medea"),
-							("Histories", "The Histories"),
+							("The Medea", "The Medea"),
+							("The Histories", "The Histories"),
 							("History of the Peloponnesian War", "History of the Peloponnesian War"),
 							("Lysistrata", "Lysistrata"),
-							("Symposium", "The Syposium"),
+							("The Symposium", "The Syposium"),
 							("Genesis", "Genesis"),
 							("Job", "Job"),
 							("Luke/John", "Luke/John") ],
 				  "spring": [("Aeneid", "The Aeneid"),
 				  			 ("Metamorphoses", "Metamorphoses"),
 				  			 ("Confessions", "Confessions"),
-				  			 ("Inferno", "The Divine Comedy"),
+				  			 ("The Divine Comedy", "The Divine Comedy"),
 				  			 ("Essays", "Essays"),
 				  			 ("King Lear", "King Lear"),
 				  			 ("Don Quixote", "Don Quixote"),
