@@ -1,7 +1,7 @@
 lithum = { "fall": 
 			{
-				"Greek Tragedy": ["Medea", "Oresteia", "Oedipus the King"],
-		  		"Play": ["Medea", "Oresteia", "Oedipus the King", "King Lear"],
+				"Greek Tragedy": ["The Medea", "Oresteia", "Oedipus the King"],
+		  		"Play": ["The Medea", "Oresteia", "Oedipus the King", "King Lear"],
 		  		"Epic": ["Aeneid", "Odyssey", "Iliad"],
 		  		"History" : ["The Histories", "History of the Peloponnesian War"],
 		  		"Bible" : ["Luke", "John", "Job", "Exodus", "Genesis"], 
@@ -42,6 +42,14 @@ lithum_titles = { "fall": [ ("The Iliad", "The Iliad"),
 				  			]		
 				}
 
+lithum_authors = {
+					("The Iliad", "Homer"),
+					("The Odyssey", "Homer"),
+					("Oresteia", "Aeschylus"),
+					("Oedipus Rex", "Sophocles")
+	
+					}
+
 cc_titles = { "spring": [ ("The Writings of David Hume", "The Writings of David Hume"),
 						("Discourse on Inequality and Social Contract", "Discourse on Inequality and Social Contract"),
 						("Wealth of Nations", "Wealth of Nations"),
@@ -60,7 +68,7 @@ cc_titles = { "spring": [ ("The Writings of David Hume", "The Writings of David 
 						("Three Guineas", "Three Guineas")
 			  		    ],
 			  "fall": [ ("Republic", "Republic"),
-			  			("Nicoachean Ethics", "Nicomachean Ethics"),
+			  			("Nicomachean Ethics", "Nicomachean Ethics"),
 			  			("Politics", "Politics"),
 			  			("The Hebrew Bible", "The Hebrew Bible"),
 			  			("Roman & Hellenistic Thought", "Roman & Hellenistic Thought"),
