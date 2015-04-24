@@ -9,7 +9,7 @@
 *.swp
 *.py~
 *.pyc
-/pids/flask-session
+/pids/flask_session
 *.db
 
 
