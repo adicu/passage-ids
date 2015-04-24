@@ -11,7 +11,7 @@ import httplib2
 import re
 from SubmissionForm import SubmissionForm
 from MultipleChoiceForm import MultipleChoiceForm
-from categories import lithum
+from categories import lithum, lithum_titles
 
 def create_app():
     app = Flask(__name__)
@@ -28,6 +28,8 @@ sess = Session()
 def before_request():
     if session.get('type', None) is None:
         session['type'] = 0
+    if session.get('form', None) is None:
+    	session['form'] = 0
 
 @app.route("/")
 def home():
@@ -57,17 +59,16 @@ def form():
             return render_template('form.html', form=form)
         quote = Passage(quote=form.quote.data,
                         title=form.title.data,
-                        author=form.author.data,
                         submitter=form.submitter.data,
                         class_type=form.class_type.data)
         db.session.add(quote)
         db.session.commit()
         form.quote.data = None
         form.title.data = None
-        form.author.data = None
         form.class_type.data = 0
         return render_template('form.html', form = form)
     elif request.method == 'GET':
+    	form.title.choices = lithum_titles["fall"]
         return render_template('form.html', form = form)
 
 @app.route("/LitHum", methods = ['POST'])
