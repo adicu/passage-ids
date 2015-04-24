@@ -1,6 +1,6 @@
 __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template, request, flash, json, g, session, redirect
+from flask import Flask, render_template, request, flash, json, session, redirect, g
 from flask.ext.session import Session
 import requests
 from schema import db, Passage, User
@@ -11,7 +11,7 @@ import httplib2
 import re
 from SubmissionForm import SubmissionForm
 from MultipleChoiceForm import MultipleChoiceForm
-from categories import lithum
+from categories import lithum1, lithum2, lithum_titles
 
 def create_app():
     app = Flask(__name__)
@@ -41,6 +41,8 @@ def lookup_current_uni():
 def before_request():
     if session.get('type', None) is None:
         session['type'] = 0
+    if session.get('form', None) is None:
+        session['form'] = 0
 
 @app.route("/")
 def home():
@@ -53,8 +55,8 @@ def home():
         randQuote = content[random.randint(0, len(content) - 1)]
     category = randQuote.category
     choices = []
-    for i in range(len(lithum[category])):
-        choices.append((i, lithum[category][i]))
+    for i in range(len(lithum1["Greek Tragedy"])):
+        choices.append((i, lithum1["Greek Tragedy"][i]))
     form.choices.choices = choices
     return render_template('content.html', content2=randQuote, form=form)
 
@@ -70,26 +72,28 @@ def setLH():
         session['type'] = 1
         return redirect('/')
 
-@app.errorhandler(404)
-def page_not_found(error):
-    return "Sorry, this page was not found.", 404
-
 @app.route("/form", methods = ['GET', 'POST'])
 def form():
     form = SubmissionForm()
+    form.title.choices = [("Choose", "Choose Title")] + lithum_titles["fall"] + lithum_titles["spring"]
     if request.method == 'POST':
         if form.validate() == False:
             flash('All fields are required.')
             return render_template('form.html', form=form)
-        if form.class_type.data == 0:
-            flash('Please choose a class: Lit Hum or CC.')
+        if form.class_type.data == 0 or  form.title.data == "Choose":
+            if form.class_type.data == 0:
+                flash("Please pick CC or Lit Hum.")
+            if form.title.data is "Choose":
+                flash("Please enter the title of the work.")
             return render_template('form.html', form=form)
-        quote = Passage(quote=form.quote.data, title=form.title.data, author=form.author.data, submitter=form.submitter.data, class_type=form.class_type.data)
+        quote = Passage(quote=form.quote.data,
+                        title=form.title.data,
+                        submitter=form.submitter.data,
+                        class_type=form.class_type.data)
         db.session.add(quote)
         db.session.commit()
         form.quote.data = None
-        form.title.data = None
-        form.author.data = None
+        form.title.data = "Choose"
         form.class_type.data = 0
         return render_template('form.html', form = form)
     elif request.method == 'GET':
