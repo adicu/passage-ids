@@ -55,8 +55,8 @@ def home():
         randQuote = content[random.randint(0, len(content) - 1)]
     category = randQuote.category
     choices = []
-    for i in range(len(lithum[category])):
-        choices.append((i, lithum[category][i]))
+    for i in range(len(lithum1["Greek Tragedy"])):
+        choices.append((i, lithum1["Greek Tragedy"][i]))
     form.choices.choices = choices
     return render_template('content.html', content2=randQuote, form=form)
 
