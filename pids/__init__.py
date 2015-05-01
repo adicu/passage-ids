@@ -45,24 +45,29 @@ def before_request():
     if session.get('form', None) is None:
         session['form'] = 0
     if session.get('semester', None) is None:
-        month = datetime.datetime.now().strftime("%m")
-        print(month)
+        month = datetime.datetime.now().month
+        if month < 6:
+            session['semester'] = 'spring'
+        else:
+            session['semester'] = 'fall'
 
 @app.route("/")
 def home():
+    current_sem = session['semester']
     form = MultipleChoiceForm()
     if session['type'] is 0:
-        content = Passage.query.all()
+        content = Passage.query.filter_by(semester=current_sem).all()
         randQuote = content[random.randint(0, len(content) - 1)]
     else:
-        content = Passage.query.filter_by(class_type=session['type']).all()
+        content = Passage.query.filter_by(class_type=session['type']).filter_by(semester=current_sem).all()
         randQuote = content[random.randint(0, len(content) - 1)]
     category = randQuote.category
     choices = [None, None, None, None, None]
     answer = randQuote.title
     choices[random.randint(0, len(choices) - 1)] = (answer, answer)
-    same_category = lithum_categories["fall"][randQuote.category]
+    same_category = lithum_categories[current_sem][randQuote.category]
     counter = 0
+    #ugly code that populates empty choices with others in same category
     while None in choices:
         counter +=1
         if counter is len(same_category):
@@ -71,8 +76,8 @@ def home():
         while (potential_choice, potential_choice) in choices:
             potential_choice = same_category[random.randint(0, len(same_category) - 1)]
         choices[choices.index(None)] = (potential_choice, potential_choice)
-        print(choices)
-    other_titles = lithum_titles["fall"]
+    other_titles = lithum_titles[current_sem]
+    #ugly code that populates empty choices with random titles from same sem
     while None in choices:
         potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
         while potential_choice in choices:

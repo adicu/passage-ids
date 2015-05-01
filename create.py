@@ -14,15 +14,20 @@ def generator(text):
 	for i in range(count):
 		content = content + " " + text[i]
 	class_type = random.randint(1,2)
+	if random.randint(0,1) is 0:
+		semester = "fall"
+	else:
+		semester = "spring"
+
 	if class_type is 1:	
-		title = lithum_titles["fall"][random.randint(0, len(lithum_titles)  - 1)][0]
+		title = lithum_titles[semester][random.randint(0, len(lithum_titles)  - 1)][0]
 		author = lithum_authors_categories[title]["author"]
 		category = lithum_authors_categories[title]["category"]
 	else:
-		title = lithum_titles["fall"][random.randint(0, len(lithum_titles)  - 1)][0]
+		title = lithum_titles[semester][random.randint(0, len(lithum_titles)  - 1)][0]
 		author = lithum_authors_categories[title]["author"]
-		category = lithum_authors_categories[title]["category"]
-	return Passage(quote=content, title=title, author=author, submitter="auto-create", class_type=class_type, category=category)
+		category = lithum_authors_categories[title]["category"]	
+	return Passage(quote=content, title=title, author=author, submitter="auto-create", class_type=class_type, category=category, semester=semester)
 
 def generatePassages():
 		for i in range(100):
