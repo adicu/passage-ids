@@ -42,6 +42,7 @@ form textarea {
   margin-bottom: 10px;
   padding: 5px;
   font-size: 1.1em;
+  border-radius: 50px;
 }
 
 .flash {
