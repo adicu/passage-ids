@@ -1,0 +1,61 @@
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans);
+
+body {
+  font: 14px 'Noto Sans', Helvetica sans-serif;	;
+  padding: 0;
+  margin:0;
+}
+
+#titlebar{
+	position: absolute;
+	width: 100%;
+	margin: 0;
+	top: 0;
+	height:8%;
+	background-color: #C4DDE2;
+	text-align: center;
+}
+
+#name{
+	position: absolute;
+	top: 40%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;	
+	width: 300px;
+	font: 16px Helvetica;
+}
+
+#name a{
+	text-decoration: none;
+	color: black;
+}
+
+#name a:hover{
+	text-decoration: none;
+	color: white;
+}
+
+#name a:visited {
+    text-decoration: none;
+}
+
+button.login_out{
+	position: absolute;
+	top: 40%;
+	margin: 0;
+	right: 8%;
+	font: 16px Helvetica;
+	color:black;
+	width:8rem;
+	padding: 0;
+	background-color: transparent;
+	border: 0;
+	cursor:pointer;
+}
+
+.fa:hover{
+	color: white;
+}
+
