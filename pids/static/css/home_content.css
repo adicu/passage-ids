@@ -54,13 +54,13 @@ span{
 	top: 5%;
 	overflow: scroll;
 	padding: 1%;
+	padding-bottom: 0;
 }
 
 #static #text p {
 	margin-right: 2%;
 	margin-left: 2%;
 	margin-top: 10%;
-	/*padding-left: 1%;*/
 	height: 100%;
 	padding-right: 1%;
 	border-style: solid;	
