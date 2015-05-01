@@ -2,7 +2,7 @@ import httplib2
 import re
 import requests
 import random
-from flask import Flask, render_template, request, flash, json, session, redirect, g
+from flask import Flask, render_template, request, flash, json, session, redirect, g, url_for
 from flask.ext.session import Session
 from schema import db, Passage, User
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -29,6 +29,35 @@ app.secret_key = 'development key'
 passage_info = None
 sess = Session()
 
+def multiple_choice(randQuote):
+    current_sem = session['semester']
+    category = randQuote.category
+    choices = [None, None, None, None, None]
+    answer = randQuote.title
+    choices[random.randint(0, len(choices) - 1)] = (answer, answer)
+    same_category = lithum_categories[current_sem][randQuote.category]
+    counter = 0
+    #ugly code that populates empty choices with others in same category
+    while None in choices:
+        counter +=1
+        if counter is len(same_category):
+            break
+        potential_choice = same_category[random.randint(0, len(same_category) - 1)]
+        while (potential_choice, potential_choice) in choices:
+            potential_choice = same_category[random.randint(0, len(same_category) - 1)]
+        choices[choices.index(None)] = (potential_choice, potential_choice)
+    other_titles = lithum_titles[current_sem]
+    #ugly code that populates empty choices with random titles from same sem
+    while None in choices:
+        potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
+        while potential_choice in choices:
+            potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
+        choices[choices.index(None)] = potential_choice
+        potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
+    return {
+        "choices": choices,
+        "answer": answer
+    }
 
 @app.before_request
 def lookup_current_uni():
@@ -49,46 +78,44 @@ def before_request():
     if session.get('form', None) is None:
         session['form'] = 0
     if session.get('semester', None) is None:
-        month = datetime.datetime.now().strftime("%m")
-        print(month)
+        month = datetime.datetime.now().month
+        if month < 6:
+            session['semester'] = 'spring'
+        else:
+            session['semester'] = 'fall'
 
 
 @app.route("/")
 def home():
+    correct = None
+    correct = request.args.get('correct')
+    print(correct)
+    current_sem = session['semester']
     form = MultipleChoiceForm()
     if session['type'] is 0:
-        content = Passage.query.all()
+        content = Passage.query.filter_by(semester=current_sem).all()
         randQuote = content[random.randint(0, len(content) - 1)]
     else:
-        content = Passage.query.filter_by(class_type=session['type']).all()
+        content = Passage.query.filter_by(class_type=session['type']).filter_by(semester=current_sem).all()
         randQuote = content[random.randint(0, len(content) - 1)]
-    category = randQuote.category
-    choices = [None, None, None, None, None]
-    answer = randQuote.title
-    choices[random.randint(0, len(choices) - 1)] = (answer, answer)
-    same_category = lithum_categories["fall"][randQuote.category]
-    counter = 0
-    while None in choices:
-        counter +=1
-        if counter is len(same_category):
-            break
-        potential_choice = same_category[random.randint(0, len(same_category) - 1)]
-        while (potential_choice, potential_choice) in choices:
-            potential_choice = same_category[random.randint(0, len(same_category) - 1)]
-        choices[choices.index(None)] = (potential_choice, potential_choice)
-        print(choices)
-    other_titles = lithum_titles["fall"]
-    while None in choices:
-        potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
-        while potential_choice in choices:
-            potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
-        choices[choices.index(None)] = potential_choice
-        potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
-    form.choices.choices = choices
-    return render_template('content.html', content2=randQuote, form=form, loggedIn=g.loggedIn, uni=g.uni)
+    json = multiple_choice(randQuote)
+    form.choices.choices = json['choices']
+    session['answer'] = json['answer']
+    return render_template('content.html', content2=randQuote, form=form, correct=correct)
 
 
-@app.route("/CC", methods=['POST'])
+
+
+@app.route("/answer", methods = ['POST'])
+def submit():
+    current_sem = session['semester']
+    form = MultipleChoiceForm()
+    correct = None
+    if form.choices.data == session['answer']:
+        correct = True
+    return redirect(url_for('home', correct=correct))
+
+@app.route("/CC", methods = ['POST'])
 def setCC():
     if request.method == "POST":
         session['type'] = 2
@@ -113,8 +140,7 @@ def form():
             form.title.data = None
         if form.validate() == False:
             flash('All fields are required.')
-            return render_template('form.html', form=form)
-
+        return render_template('form.html', form=form)
         quote = Passage(quote=form.quote.data,
                         title=form.title.data,
                         submitter=form.submitter.data,

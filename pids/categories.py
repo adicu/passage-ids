@@ -1,13 +1,12 @@
 lithum_categories = {
 			"fall": 
 			{
-				"Greek Tragedy": ["The Medea", "Oresteia", "Oedipus the King"],
-		  		"Play": ["The Medea", "Oresteia", "Oedipus the King", "King Lear"],
-		  		"Epic": ["The Aeneid", "The Odyssey", "The Iliad"],
+				"Greek Tragedy": ["The Medea", "Oresteia", "Oedipus Rex"],
+		  		"Play": ["The Medea", "Oresteia", "Oedipus Rex", "Lysistrata"],
+		  		"Epic": ["The Odyssey", "The Iliad"],
 		  		"History" : ["The Histories", "History of the Peloponnesian War"],
-		  		"Bible" : ["Luke", "John", "Job", "Exodus", "Genesis"], 
-		  		"Roman" : ["The Golden Ass", "Metamorphoses", "Aeneid", "Confessions"], 
-		  		"Novel" : ["Don Quixote", "Pride and Prejudice", "To the Lighthouse", "The Golden Ass"]
+		  		"Bible" : ["Luke", "John", "Job", "Exodus", "Genesis"],  
+		  		"Novel" : ["The Symposium"]
 			},
 			"spring":
 		    {
@@ -44,28 +43,28 @@ lithum_titles = { "fall": [ ("The Iliad", "The Iliad"),
 				}
 
 lithum_authors_categories = {
-					"The Iliad": {"author": "Homer", "category": "Epic"},
-					"The Odyssey": {"author": "Homer", "category": "Epic"},
-					"Oresteia": {"author": "Aeschylus", "category": "Greek Tragedy"},
-					"Oedipus Rex": {"author": "Sophocles", "category": "Greek Tragedy"},
-					"The Medea": {"author": "Euripides", "category": "Greek Tragedy"},
-					"The Histories": {"author": "Herodotus", "category": ""},
-					"History of the Peloponnesian War": {"author": "Thucydides", "category": ""},
-					"Lysistrata": {"author": "Aristophanes", "category": ""},
-					"The Symposium": {"author": "Plato", "category": ""},
-					"Genesis": {"author": "Unknown", "category": ""},
-					"Job": {"author": "Unknown", "category": ""},
-					"Luke/John": {"author": "Unknown", "category": ""},
-					"The Aeneid": {"author": "Virgil", "category": "Epic"},
-					"Metamorphoses": {"author": "Ovid", "category": ""},
-				  	"Confessions": {"author": "St. Augustine", "category": ""},
-				  	"The Divine Comedy": {"author": "Dante Alighieri", "category": ""},
-				  	"Essays": {"author": "Michel de Montaigne", "category": ""},
-				  	"King Lear": {"author": "William Shakespeare", "category": ""},
-				  	"Don Quixote": {"author": "Miguel de Cervantes", "category": ""},
-				  	"Faust": {"author": "Goethe", "category": ""},
-				  	"Pride and Prejudice": {"author": "Jane Austen", "category": "Novel"},
-				  	"Crime and Punishment": {"author": "Fyodor Dostoyevsky", "category": "Novel"}
+					"The Iliad": {"author": "Homer", "category": "Epic", "semester": "fall"},
+					"The Odyssey": {"author": "Homer", "category": "Epic", "semester": "fall"},
+					"Oresteia": {"author": "Aeschylus", "category": "Greek Tragedy", "semester": "fall"},
+					"Oedipus Rex": {"author": "Sophocles", "category": "Greek Tragedy", "semester": "fall"},
+					"The Medea": {"author": "Euripides", "category": "Greek Tragedy", "semester": "fall"},
+					"The Histories": {"author": "Herodotus", "category": "History", "semester": "fall"},
+					"History of the Peloponnesian War": {"author": "Thucydides", "category": "History", "semester": "fall"},
+					"Lysistrata": {"author": "Aristophanes", "category": "Play", "semester": "fall"},
+					"The Symposium": {"author": "Plato", "category": "Novel", "semester": "fall"},
+					"Genesis": {"author": "Unknown", "category": "Bible", "semester": "fall"},
+					"Job": {"author": "Unknown", "category": "Bible", "semester": "fall"},
+					"Luke/John": {"author": "Unknown", "category": "Bible", "semester": "fall"},
+					"The Aeneid": {"author": "Virgil", "category": "Ancient", "semester": "spring"},
+					"Metamorphoses": {"author": "Ovid", "category": "Ancient", "semester": "spring"},
+				  	"Confessions": {"author": "St. Augustine", "category": "Medieval", "semester": "spring"},
+				  	"The Divine Comedy": {"author": "Dante Alighieri", "category": "Medieval", "semester": "spring"},
+				  	"Essays": {"author": "Michel de Montaigne", "category": "Novel", "semester": "spring"},
+				  	"King Lear": {"author": "William Shakespeare", "category": "Medieval", "semester": "spring"},
+				  	"Don Quixote": {"author": "Miguel de Cervantes", "category": "Novel", "semester": "spring"},
+				  	"Faust": {"author": "Goethe", "category": "Existential", "semester": "spring"},
+				  	"Pride and Prejudice": {"author": "Jane Austen", "category": "Novel", "semester": "spring"},
+				  	"Crime and Punishment": {"author": "Fyodor Dostoyevsky", "category": "Existential", "semester": "spring"}
 				  }
 
 cc_titles = { "spring": [ ("The Writings of David Hume", "The Writings of David Hume"),
