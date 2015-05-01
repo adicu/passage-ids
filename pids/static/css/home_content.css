@@ -1,5 +1,130 @@
-
 #content{
+	position: absolute;
+	width:65%;
+	top: 8%;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	margin: auto;
+	height: 80%;
+}
+
+#static{
+	margin-right: 0;
+	width: 49%;
+	height: 100%;
+	float: left;
+    text-align: center;
+	border: 0;
+}
+
+.choice{
+	display:inline-block;
+	margin-top: 3%;
+	margin-bottom: 0;
+}
+
+button#choose_passage{
+	background-color: transparent;
+	padding: 0;
+	border-color: #ccc;
+	border-style: solid;
+	height: 2rem;
+	border-radius: 0;
+	width: 3rem;
+	cursor:pointer
+}
+
+span{
+	width: 100%;
+}
+
+#CC{
+	margin-left: 25%;
+}
+#static #text{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	height: 70%;
+	width: 90%;
+	position: relative;
+	top: 5%;
+	overflow: scroll;
+	padding-bottom: 1%;
+}
+
+#static #text p {
+	margin-right: 2%;
+	margin-left: 2%;
+	margin-top: 10%;
+	padding-left: 1%;
+	height: 100%;
+	padding-right: 1%;
+	border-style: solid;	
+	margin-bottom: 0;
+}
+
+#add_content{
+	margin-top: 20%;	
+	margin-bottom: 0;
+}
+
+
+#quiz{	
+	margin-left: 2%;
+	border: 0;
+	float: left;
+	width: 49%;
+    height: 100%;
+    overflow-y: auto;
+    border-style: solid;
+	text-align: center;
+}
+
+#prompt{
+	margin-top: 3%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 90%;
+	border-style: solid;
+	font-size: 13px;
+	height: 2rem;
+	overflow: auto;	
+}
+
+#prompt p{
+	position: relative;
+	top: 25%;	
+	overflow: auto;	
+	margin: 0;	
+}
+
+#answer_choices{
+	position: relative;
+	top: 4%;
+	margin-left: auto;
+	margin-right: auto;
+	height: 80%;
+	width: 90%;
+	margin-bottom: 0;	
+	border-style: solid;
+	padding-bottom: 1%;
+}
+
+#answer_choices #texts{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: solid;
+	height: 70%;
+	width: 80%;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	overflow: scroll;
+}#content{
 	position: absolute;
 	width:65%;
 	top: 3%;

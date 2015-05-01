@@ -1,6 +1,8 @@
 div#quiz #text{
+	position: absolute;
 	margin-top: 5%;
 	width: 90%;
+	left: 5%;
 }
 
 div#multiple_choices{
