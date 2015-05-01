@@ -9,11 +9,11 @@ lithum_categories = {
 		  		"Roman" : ["The Golden Ass", "Metamorphoses", "Aeneid", "Confessions"], 
 		  		"Novel" : ["Don Quixote", "Pride and Prejudice", "To the Lighthouse", "The Golden Ass"]
 			},
-		   "spring":
+			"spring":
 		    {
 		    	"Ancient": ["The Aeneid", "Metamorphoses"],
 				"Existential": ["Faust", "Crime and Punishment"],
-				"Medieval": ["Confessions", "Don Quixote", "King Lear"],
+				"Medieval": ["Confessions", "Don Quixote", "King Lear", "The Divine Comedy"],
 				"Novel": ["Essays", "Pride and Prejudice", "To the Lighthouse" ],
 			}
 		 }
@@ -104,3 +104,21 @@ cc_titles = { "spring": [ ("The Writings of David Hume", "The Writings of David 
 			  			("Second Treatise", "Second Treatise")
 			  		  ]
 			}
+
+lithum = { "fall": 
+			{
+				"Ancient" : ["Republic", "Nicomachean Ethics", "Politics", "Roman & Hellenistic Thought", "The Writings of David Hume" ],
+				"Medieval" : ["Medieval Philosophy", "City of God"],
+				"Biblical" : ["New Testament", "The Qur'an", "The Hebrew Bible"],
+				"Philosophical": ["Second Treatise", "Leviathan", "New World Writings", "Discourse on Method and Meditations on First Philosophy"],
+				"Renaissance": ["The Prince", "The Scientific Revolution", "The Discourses", "The Protestant Reformation"],
+			},
+		   "spring":
+		    {
+		    	"Enlightenment": ["Discourse on Inequality and Social Contract", "Wealth of Nations", "Groundwork for the Metaphysics of Morals" ],
+		    	"Freedom": ["Democracy in America", "On Liberty and Other Essays"],
+		    	"Revolution": ["Selections from the Marx-Engels Reader", "The French Revolution", "Reflections on the Revolutions in France", "American Revolution and Founding Texts"],
+		    	"Morality": ["The Writings of Sigmund Freud", "On the Genealogy of Morals", "The Writings of Charles Darwin"],
+		    	"Oppression": ["Three Guineas", "A Vindication of the Rights of Woman", "The Souls of Black Folk"],
+		    }
+		  }
