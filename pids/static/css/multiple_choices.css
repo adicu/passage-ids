@@ -1,4 +1,4 @@
-div#quiz #content{
+div#quiz #text{
 	margin-top: 5%;
 	width: 90%;
 }
@@ -27,4 +27,6 @@ div#multiple_choices input{
  	background-color: transparent;
 }
 
-
+div#multiple_choices input:hover{
+	cursor: pointer;
+}
