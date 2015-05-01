@@ -28,39 +28,8 @@ app.secret_key = 'development key'
 passage_info = None
 sess = Session()
 
-
-@app.before_request
-def lookup_current_uni():
-    g.uni = None
-    if 'gplus_id' in session:
-        gplus_id = session['gplus_id']
-        user=User.query.filter_by(gplus_id=gplus_id).all()
-        # if user is not None:    
-        #     g.uni = user[0].uni
-        #     print g.uni
-@app.before_request
-def before_request():
-    if session.get('type', None) is None:
-        session['type'] = 0
-    if session.get('form', None) is None:
-        session['form'] = 0
-    if session.get('semester', None) is None:
-        month = datetime.datetime.now().month
-        if month < 6:
-            session['semester'] = 'spring'
-        else:
-            session['semester'] = 'fall'
-
-@app.route("/")
-def home():
+def multiple_choice(randQuote):
     current_sem = session['semester']
-    form = MultipleChoiceForm()
-    if session['type'] is 0:
-        content = Passage.query.filter_by(semester=current_sem).all()
-        randQuote = content[random.randint(0, len(content) - 1)]
-    else:
-        content = Passage.query.filter_by(class_type=session['type']).filter_by(semester=current_sem).all()
-        randQuote = content[random.randint(0, len(content) - 1)]
     category = randQuote.category
     choices = [None, None, None, None, None]
     answer = randQuote.title
@@ -84,8 +53,53 @@ def home():
             potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
         choices[choices.index(None)] = potential_choice
         potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
-    form.choices.choices = choices
+    return {
+        "choices": choices,
+        "answer": answer
+    }
+
+@app.before_request
+def lookup_current_uni():
+    g.uni = None
+    if 'gplus_id' in session:
+        gplus_id = session['gplus_id']
+        user=User.query.filter_by(gplus_id=gplus_id).all()
+        # if user is not None:    
+        #     g.uni = user[0].uni
+        #     print g.uni
+@app.before_request
+def before_request():
+    if session.get('type', None) is None:
+        session['type'] = 0
+    if session.get('form', None) is None:
+        session['form'] = 0
+    if session.get('semester', None) is None:
+        month = datetime.datetime.now().month
+        if moznth < 6:
+            session['semester'] = 'spring'
+        else:
+            session['semester'] = 'fall'
+
+@app.route("/")
+def home():
+    current_sem = session['semester']
+    form = MultipleChoiceForm()
+    if session['type'] is 0:
+        content = Passage.query.filter_by(semester=current_sem).all()
+        randQuote = content[random.randint(0, len(content) - 1)]
+    else:
+        content = Passage.query.filter_by(class_type=session['type']).filter_by(semester=current_sem).all()
+        randQuote = content[random.randint(0, len(content) - 1)]
+    json = multiple_choice(randQuote)
+    form.choices.choices = json['choices']
     return render_template('content.html', content2=randQuote, form=form)
+
+
+
+
+@app.route("/answer", methods = ['POST'])
+def submit():
+    return render_template('content.html')
 
 @app.route("/CC", methods = ['POST'])
 def setCC():

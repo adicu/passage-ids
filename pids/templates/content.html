@@ -56,10 +56,12 @@
 						{{content2.title}}	
 					</div>
 					<div id = 'multiple_choices'>
-						{{ form.choices.label }}
-						{{ form.choices }}
+						<form action="/answer" method="POST">
+							{{ form.choices.label }}
+							{{ form.choices }}
 
-						{{ form.submit }}
+							{{ form.submit }}
+						</form>
 					</div>
 				</div>
 			</div>
