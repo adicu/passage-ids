@@ -12,8 +12,22 @@
 </head>
 <body>
 	<div id="titlebar">
-	{% block header %}
-	{% endblock %}
+	<div id="name">
+		<a href = "/">Passage ID</a>
+		</div>
+		{% if loggedIn %}
+			<div id="login">
+		        <form action="/logout" method="get"> 
+		            	<button type="submit" id = "logout" class = "login_out">{{ uni }} &nbsp;<i class="fa fa-sign-out fa-lg"></i></button>
+		        </form>
+			</div>
+		{% else %}
+			<div id="login">
+					<form action="/login" method="get"> 
+		            	<button type="submit" id = "login" class = "login_out">Login &nbsp;<i class="fa fa-sign-in fa-lg"></i></button>
+		        	</form>
+			</div>
+		{% endif %}
 	</div>
 	{% block body %}
 	{% endblock %}

@@ -117,19 +117,19 @@ def form():
 
         quote = Passage(quote=form.quote.data,
                         title=form.title.data,
-                        submitter=form.submitter.data,
+                        submitter=g.uni,
                         class_type=form.class_type.data)
         db.session.add(quote)
         db.session.commit()
         form.quote.data = None
         form.title.data = "Choose"
         form.class_type.data = 0
-        return render_template('form.html', form=form)
+        return render_template('form.html', form=form, loggedIn=g.loggedIn, uni=g.uni)
     elif request.method == 'GET':
-        return render_template('form.html', form=form)
+        return render_template('form.html', form=form, loggedIn=g.loggedIn, uni=g.uni)
 
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route("/login", methods=['GET'])
 def login():
     """
     Returns an auth code after user logs in through Google+.
@@ -179,7 +179,7 @@ def login():
     return render_template('auth.html', success=True, uni=uni, code=code)
 
 
-@app.route("/logout", methods=['POST'])
+@app.route("/logout", methods=['GET'])
 def logout():
     g.loggedIn = False
     g.uni = None
