@@ -3,7 +3,7 @@ lithum_categories = {
 			{
 				"Greek Tragedy": ["The Medea", "Oresteia", "Oedipus the King"],
 		  		"Play": ["The Medea", "Oresteia", "Oedipus the King", "King Lear"],
-		  		"Epic": ["Aeneid", "Odyssey", "Iliad"],
+		  		"Epic": ["The Aeneid", "The Odyssey", "The Iliad"],
 		  		"History" : ["The Histories", "History of the Peloponnesian War"],
 		  		"Bible" : ["Luke", "John", "Job", "Exodus", "Genesis"], 
 		  		"Roman" : ["The Golden Ass", "Metamorphoses", "Aeneid", "Confessions"], 
