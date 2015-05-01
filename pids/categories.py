@@ -1,4 +1,5 @@
-lithum = { "fall": 
+lithum_categories = {
+			"fall": 
 			{
 				"Greek Tragedy": ["The Medea", "Oresteia", "Oedipus the King"],
 		  		"Play": ["The Medea", "Oresteia", "Oedipus the King", "King Lear"],
@@ -42,13 +43,30 @@ lithum_titles = { "fall": [ ("The Iliad", "The Iliad"),
 				  			]		
 				}
 
-lithum_authors = {
-					("The Iliad", "Homer"),
-					("The Odyssey", "Homer"),
-					("Oresteia", "Aeschylus"),
-					("Oedipus Rex", "Sophocles")
-	
-					}
+lithum_authors_categories = {
+					"The Iliad": {"author": "Homer", "category": "Epic"},
+					"The Odyssey": {"author": "Homer", "category": "Epic"},
+					"Oresteia": {"author": "Aeschylus", "category": "Greek Tragedy"},
+					"Oedipus Rex": {"author": "Sophocles", "category": "Greek Tragedy"},
+					"The Medea": {"author": "Euripides", "category": "Greek Tragedy"},
+					"The Histories": {"author": "Herodotus", "category": ""},
+					"History of the Peloponnesian War": {"author": "Thucydides", "category": ""},
+					"Lysistrata": {"author": "Aristophanes", "category": ""},
+					"The Symposium": {"author": "Plato", "category": ""},
+					"Genesis": {"author": "Unknown", "category": ""},
+					"Job": {"author": "Unknown", "category": ""},
+					"Luke/John": {"author": "Unknown", "category": ""},
+					"The Aeneid": {"author": "Virgil", "category": "Epic"},
+					"Metamorphoses": {"author": "Ovid", "category": ""},
+				  	"Confessions": {"author": "St. Augustine", "category": ""},
+				  	"The Divine Comedy": {"author": "Dante Alighieri", "category": ""},
+				  	"Essays": {"author": "Michel de Montaigne", "category": ""},
+				  	"King Lear": {"author": "William Shakespeare", "category": ""},
+				  	"Don Quixote": {"author": "Miguel de Cervantes", "category": ""},
+				  	"Faust": {"author": "Goethe", "category": ""},
+				  	"Pride and Prejudice": {"author": "Jane Austen", "category": "Novel"},
+				  	"Crime and Punishment": {"author": "Fyodor Dostoyevsky", "category": "Novel"}
+				  }
 
 cc_titles = { "spring": [ ("The Writings of David Hume", "The Writings of David Hume"),
 						("Discourse on Inequality and Social Contract", "Discourse on Inequality and Social Contract"),
