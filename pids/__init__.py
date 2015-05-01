@@ -10,6 +10,7 @@ from oauth2client.client import flow_from_clientsecrets
 from SubmissionForm import SubmissionForm
 from MultipleChoiceForm import MultipleChoiceForm
 from categories import lithum_categories, lithum_titles, lithum_authors_categories
+import datetime
 
 __author__ = 'ADI Labs'
 # -*- coding: utf-8 -*-
@@ -47,6 +48,9 @@ def before_request():
         session['type'] = 0
     if session.get('form', None) is None:
         session['form'] = 0
+    if session.get('semester', None) is None:
+        month = datetime.datetime.now().strftime("%m")
+        print(month)
 
 
 @app.route("/")
@@ -59,12 +63,28 @@ def home():
         content = Passage.query.filter_by(class_type=session['type']).all()
         randQuote = content[random.randint(0, len(content) - 1)]
     category = randQuote.category
-    choices = []
-    for i in range(len(lithum_categories["fall"]["Greek Tragedy"])):
-        choices.append((i, lithum_categories["fall"]["Greek Tragedy"][i]))
+    choices = [None, None, None, None, None]
+    answer = randQuote.title
+    choices[random.randint(0, len(choices) - 1)] = (answer, answer)
+    same_category = lithum_categories["fall"][randQuote.category]
+    counter = 0
+    while None in choices:
+        counter +=1
+        if counter is len(same_category):
+            break
+        potential_choice = same_category[random.randint(0, len(same_category) - 1)]
+        while (potential_choice, potential_choice) in choices:
+            potential_choice = same_category[random.randint(0, len(same_category) - 1)]
+        choices[choices.index(None)] = (potential_choice, potential_choice)
+        print(choices)
+    other_titles = lithum_titles["fall"]
+    while None in choices:
+        potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
+        while potential_choice in choices:
+            potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
+        choices[choices.index(None)] = potential_choice
+        potential_choice = other_titles[random.randint(0, len(other_titles) - 1)]
     form.choices.choices = choices
-    g.randQuote = randQuote
-    g.form = form
     return render_template('content.html', content2=randQuote, form=form, loggedIn=g.loggedIn, uni=g.uni)
 
 
@@ -87,15 +107,14 @@ def form():
     form = SubmissionForm()
     form.title.choices = [("Choose", "Choose Title")] + lithum_titles["fall"] + lithum_titles["spring"]
     if request.method == 'POST':
+        if form.class_type.data == 0:
+            form.class_type.data = None
+        if form.title.data == "Choose":
+            form.title.data = None
         if form.validate() == False:
             flash('All fields are required.')
             return render_template('form.html', form=form)
-        if form.class_type.data == 0 or form.title.data == "Choose":
-            if form.class_type.data == 0:
-                flash("Please pick CC or Lit Hum.")
-            if form.title.data is "Choose":
-                flash("Please enter the title of the work.")
-            return render_template('form.html', form=form)
+
         quote = Passage(quote=form.quote.data,
                         title=form.title.data,
                         submitter=form.submitter.data,
@@ -157,9 +176,7 @@ def login():
 
     session['gplus_id'] = gplus_id
 
-    # print passageInfo
     return render_template('auth.html', success=True, uni=uni, code=code)
-    # return render_template('content.html', loggedIn = True, uni = uni)
 
 
 @app.route("/logout", methods=['POST'])

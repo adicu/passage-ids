@@ -7,7 +7,7 @@
 	{% if loggedIn %}
 		<div id="login">
 	        <form action="/logout" method="post"> 
-	            	<button type="submit" id = "logout" class = "login_out">Hello {{ uni }}! &nbsp;<i class="fa fa-sign-out fa-lg"></i></button>
+	            	<button type="submit" id = "logout" class = "login_out">{{ uni }} &nbsp;<i class="fa fa-sign-out fa-lg"></i></button>
 	        </form>
 		</div>
 	{% else %}
