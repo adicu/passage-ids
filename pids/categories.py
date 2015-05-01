@@ -112,7 +112,7 @@ lithum = { "fall":
 				"Biblical" : ["New Testament", "The Qur'an", "The Hebrew Bible"],
 				"Philosophical": ["Second Treatise", "Leviathan", "New World Writings", "Discourse on Method and Meditations on First Philosophy"],
 				"Renaissance": ["The Prince", "The Scientific Revolution", "The Discourses", "The Protestant Reformation"],
-			}
+			},
 		   "spring":
 		    {
 		    	"Enlightenment": ["Discourse on Inequality and Social Contract", "Wealth of Nations", "Groundwork for the Metaphysics of Morals" ],
