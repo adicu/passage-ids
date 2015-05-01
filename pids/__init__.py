@@ -2,7 +2,7 @@ import httplib2
 import re
 import requests
 import random
-from flask import Flask, render_template, request, flash, json, session, redirect, g
+from flask import Flask, render_template, request, flash, json, session, redirect, g, url_for
 from flask.ext.session import Session
 from schema import db, Passage, User
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -79,7 +79,7 @@ def before_request():
         session['form'] = 0
     if session.get('semester', None) is None:
         month = datetime.datetime.now().month
-        if moznth < 6:
+        if month < 6:
             session['semester'] = 'spring'
         else:
             session['semester'] = 'fall'
@@ -87,6 +87,9 @@ def before_request():
 
 @app.route("/")
 def home():
+    correct = None
+    correct = request.args.get('correct')
+    print(correct)
     current_sem = session['semester']
     form = MultipleChoiceForm()
     if session['type'] is 0:
@@ -97,14 +100,20 @@ def home():
         randQuote = content[random.randint(0, len(content) - 1)]
     json = multiple_choice(randQuote)
     form.choices.choices = json['choices']
-    return render_template('content.html', content2=randQuote, form=form)
+    session['answer'] = json['answer']
+    return render_template('content.html', content2=randQuote, form=form, correct=correct)
 
 
 
 
 @app.route("/answer", methods = ['POST'])
 def submit():
-    return render_template('content.html')
+    current_sem = session['semester']
+    form = MultipleChoiceForm()
+    correct = None
+    if form.choices.data == session['answer']:
+        correct = True
+    return redirect(url_for('home', correct=correct))
 
 @app.route("/CC", methods = ['POST'])
 def setCC():
@@ -131,8 +140,7 @@ def form():
             form.title.data = None
         if form.validate() == False:
             flash('All fields are required.')
-            return render_template('form.html', form=form)
-
+        return render_template('form.html', form=form)
         quote = Passage(quote=form.quote.data,
                         title=form.title.data,
                         submitter=form.submitter.data,

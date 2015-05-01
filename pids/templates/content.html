@@ -57,7 +57,11 @@
 			</div>
 		</div>
 		<div id="quiz">
+			
 			<div id="prompt">
+				{% if correct%}
+				<p>Correct!</p>	
+				{% endif %}
 				<p>Choose the title of the book from which this quote was taken </p>
 			</div>
 			<div id="answer_choices">
